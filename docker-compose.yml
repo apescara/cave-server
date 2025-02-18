@@ -1,0 +1,124 @@
+version: "1"
+
+services:
+
+  portainer:
+    image: portainer/portainer-ce
+    container_name: portainer
+    restart: always
+    command: -H unix:///var/run/docker.sock
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+      - ${USERDIR}/docker/portainer/data:/data
+      - ${USERDIR}/docker/shared:/shared
+    environment:
+      - TZ=${TZ}
+
+  dash:
+    image: mauricenino/dashdot:latest
+    restart: unless-stopped
+    privileged: true
+    ports:
+      - '80:3001'
+    volumes:
+      - /:/mnt/host:ro
+
+  watchtower:
+    image: containrrr/watchtower
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+      - /root/.docker/config.json:/config.json
+    command: --interval 30
+    
+  qbittorrent:
+    image: lscr.io/linuxserver/qbittorrent:latest
+    container_name: qbittorrent
+    restart: unless-stopped
+    environment:
+      - PUID=${PUID}
+      - PGID=${PGID}
+      - TZ=${TZ}
+      - WEBUI_PORT=8080
+      - TORRENTING_PORT=6881
+    ports:
+      - 8080:8080
+      - 6881:6881
+      - 6881:6881/upd
+    volumes:
+      - ${USERDIR}/system/appdata/config:/config
+      - ${USERDIR}/system/downloads:/downloads
+      - ${USERDIR}/system/plex:/plex
+  
+  homearr:
+    image: ghcr.io/homarr-labs/homarr:latest
+    container_name: homarr
+    restart: unless-stopped
+    environment:
+      - SECRET_ENCRYPTION_KEY='9c1c29d7b861ece9e958978e13ae68cfe5895105ade066a65f6899ab80f9ada0'
+    ports:
+      - 7575:7575
+    volumes:
+      - ${USERDIR}/system/homarr/appdata:/appdata
+      - /var/run/docker.sock:/var/run/docker.sock
+
+  prowlarr:
+    image: ghcr.io/hotio/prowlarr
+    container_name: prowlarr
+    restart: unless-stopped
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=${TZ}
+      - UMASK=002
+    ports:
+      - 9696:9696
+    volumes:
+      - ${USERDIR}/system/prowlarr/config:/config
+
+  sonarr:
+    image: ghcr.io/hotio/sonarr
+    container_name: sonarr
+    restart: unless-stopped
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=${TZ}
+      - UMASK=002
+    ports:
+      - 8989:8989
+    volumes:
+      - ${USERDIR}/system/sonarr/config:/config
+      - ${USERDIR}/system/downloads:/downloads
+      - ${USERDIR}/system/plex:/data
+  
+  radarr:
+    image: ghcr.io/hotio/radarr
+    container_name: radarr
+    restart: unless-stopped
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=${TZ}
+      - UMASK=002
+    ports:
+      - 7878:7878
+    volumes:
+      - ${USERDIR}/system/radarr/config:/config
+      - ${USERDIR}/system/downloads:/downloads
+      - ${USERDIR}/system/plex:/data
+
+  plex:
+    image: lscr.io/linuxserver/plex:latest
+    container_name: plex
+    restart: unless-stopped
+    environment:
+      - PUID=${PUID}
+      - PGID=${PGID}
+      - TZ=${TZ}
+      - VERSION=docker
+    network_mode: host
+    volumes:
+      - ${USERDIR}/system/plex/config:/config
+      - ${USERDIR}/system/plex/movies:/movies
+      - ${USERDIR}/system/plex/series:/series
+    device: /dev/dri:/dev/dri
