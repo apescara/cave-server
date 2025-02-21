@@ -22,14 +22,6 @@ services:
       - '80:3001'
     volumes:
       - /:/mnt/host:ro
-      # - /proc:/mnt/host/proc:ro
-      # - /sys:/mnt/host/sys:ro
-      # - /media:/mnt/host/media:ro
-      # - /etc/os-release:/mnt/host/etc/os-release:ro
-    environment:
-      DASHDOT_ENABLE_CPU_TEMPS: true
-      DASHDOT_ALWAYS_SHOW_PERCENTAGES: true
-      DASHDOT_WIDGET_LIST: 'os,cpu,storage,ram,network'
 
   watchtower:
     image: containrrr/watchtower
@@ -51,7 +43,7 @@ services:
     ports:
       - 8080:8080
       - 6881:6881
-      - 6881:6881/udp
+      - 6881:6881/upd
     volumes:
       - ${USERDIR}/system/appdata/config:/config
       - ${USERDIR}/system/downloads:/downloads
@@ -62,7 +54,7 @@ services:
     container_name: homarr
     restart: unless-stopped
     environment:
-      - SECRET_ENCRYPTION_KEY=9c1c29d7b861ece9e958978e13ae68cfe5895105ade066a65f6899ab80f9ada0
+      - SECRET_ENCRYPTION_KEY='9c1c29d7b861ece9e958978e13ae68cfe5895105ade066a65f6899ab80f9ada0'
     ports:
       - 7575:7575
     volumes:
@@ -129,5 +121,4 @@ services:
       - ${USERDIR}/system/plex/config:/config
       - ${USERDIR}/system/plex/movies:/movies
       - ${USERDIR}/system/plex/series:/series
-    devices: 
-      - /dev/dri:/dev/dri
+    device: /dev/dri:/dev/dri
