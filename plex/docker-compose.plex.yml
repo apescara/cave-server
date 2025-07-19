@@ -1,0 +1,16 @@
+services:
+  plex:
+    image: lscr.io/linuxserver/plex:latest
+    container_name: plex
+    restart: unless-stopped
+    environment:
+      - PUID=${PUID}
+      - PGID=${PGID}
+      - TZ=${TZ}
+      - VERSION=docker
+    network_mode: host
+    volumes:
+      - ~/cave-server/plex/config:/config
+      - /mnt/series/series:/series
+    devices: 
+      - /dev/dri:/dev/dri
