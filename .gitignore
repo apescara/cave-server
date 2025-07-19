@@ -1,2 +1,9 @@
+*.log
+blog/blog*
+blog/nginx/conf/www
+gitlab/logs
+portainer/data
 .env
-*.key
+.env.generated
+*.patch
+*.swp
