@@ -7,4 +7,5 @@ portainer/data
 .env.generated
 *.patch
 *.swp
-*/config/*
+config/
+appdata/
