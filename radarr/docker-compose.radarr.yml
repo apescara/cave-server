@@ -12,5 +12,5 @@ services:
       - 7878:7878
     volumes:
       - ./config:/config
-      - /mnt/movies/downloads:/downloads
+      - /mnt/series/downloads:/downloads
       - /mnt/movies/movies:/data
