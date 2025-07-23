@@ -1,0 +1,19 @@
+services:
+  jellyfin:
+    image: 'jellyfin/jellyfin'
+    restart: 'unless-stopped'
+    network_mode: 'host'
+    environment:
+      - PUID=${PUID}
+      - PGID=${PGID}
+      - TZ=${TZ}
+    ports:
+      - 8096:8096
+    volumes:
+      - './cache:/cache'
+      - './config:/config'
+      - './logs:/logs'
+      - /mnt/series/series:/series
+      - /mnt/movies/movies:/movies
+    extra_hosts:
+      - 'host.docker.internal:host-gateway'

@@ -9,3 +9,5 @@ portainer/data
 *.swp
 config/
 appdata/
+cache/
+logs/

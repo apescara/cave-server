@@ -8,3 +8,4 @@ include:
   - path: "radarr/docker-compose.radarr.yml"
   - path: "sonarr/docker-compose.sonarr.yml"
   - path: "watchtower/docker-compose.watchtower.yml"
+  - path: "jellyfin/docker-compose.jellyfin.yml"
