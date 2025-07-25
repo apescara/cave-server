@@ -1,0 +1,10 @@
+include:
+  - path: "plex/docker-compose.plex.yml"
+  - path: "portainer-agent/docker-compose.portainer-agent.yml"
+  - path: "prowlarr/docker-compose.prowlarr.yml"
+  - path: "qbittorrent/docker-compose.qbittorrent.yml"
+  - path: "radarr/docker-compose.radarr.yml"
+  - path: "sonarr/docker-compose.sonarr.yml"
+  - path: "watchtower/docker-compose.watchtower.yml"
+  - path: "jellyfin/docker-compose.jellyfin.yml"
+  - path: "dashdot/docker-compose.dashdot.yml"
