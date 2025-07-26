@@ -9,3 +9,4 @@ include:
   - path: "jellyfin/docker-compose.jellyfin.yml"
   - path: "dashdot/docker-compose.dashdot.yml"
   - path: "jellyseerr/docker-compose.jellyseerr.yml"
+  - path: "maintainerr/docker-compose.maintainerr.yml"
