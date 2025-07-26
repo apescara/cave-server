@@ -8,3 +8,4 @@ include:
   - path: "watchtower/docker-compose.watchtower.yml"
   - path: "jellyfin/docker-compose.jellyfin.yml"
   - path: "dashdot/docker-compose.dashdot.yml"
+  - path: "jellyseerr/docker-compose.jellyseerr.yml"
