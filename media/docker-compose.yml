@@ -1,5 +1,5 @@
 include:
-  - path: "plex/docker-compose.plex.yml"
+  # - path: "plex/docker-compose.plex.yml"
   # - path: "portainer-agent/docker-compose.portainer-agent.yml"
   - path: "prowlarr/docker-compose.prowlarr.yml"
   - path: "qbittorrent/docker-compose.qbittorrent.yml"
@@ -10,3 +10,4 @@ include:
   - path: "dashdot/docker-compose.dashdot.yml"
   - path: "jellyseerr/docker-compose.jellyseerr.yml"
   # - path: "maintainerr/docker-compose.maintainerr.yml"
+  - path: "bazarr/docker-compose.bazarr.yml"
