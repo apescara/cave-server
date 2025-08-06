@@ -1,0 +1,16 @@
+---
+services:
+  lazylibrarian:
+    image: lscr.io/linuxserver/lazylibrarian:latest
+    container_name: lazylibrarian
+    environment:
+      - PUID=${PUID}
+      - PGID=${PGID}
+      - TZ=${TZ}
+    volumes:
+      - './config:/config'
+      - /mnt/series/books:/books
+      - /mnt/series/downloads:/downloads
+    ports:
+      - 5299:5299
+    restart: unless-stopped

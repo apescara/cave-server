@@ -11,3 +11,4 @@ include:
   - path: "jellyseerr/docker-compose.jellyseerr.yml"
   # - path: "maintainerr/docker-compose.maintainerr.yml"
   - path: "bazarr/docker-compose.bazarr.yml"
+  - path: "lazylibrarian/docker-compose.lazylibrarian.yml"
