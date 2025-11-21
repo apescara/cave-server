@@ -12,3 +12,4 @@ include:
   # - path: "maintainerr/docker-compose.maintainerr.yml"
   - path: "bazarr/docker-compose.bazarr.yml"
   - path: "lazylibrarian/docker-compose.lazylibrarian.yml"
+  - path: "homarr/docker-compose.homarr.yml"
