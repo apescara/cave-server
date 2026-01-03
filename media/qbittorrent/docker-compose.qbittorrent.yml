@@ -16,3 +16,4 @@ services:
     volumes:
       - ./config:/config
       - /mnt/series/downloads:/downloads
+      - /mnt/series/anime:/anime
