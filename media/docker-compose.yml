@@ -14,3 +14,4 @@ include:
   - path: "homarr/docker-compose.homarr.yml"
   - path: "dashdot/docker-compose.dashdot.yml"
   - path: "seanime/docker-compose.seanime.yml"
+  - path: "transmission/docker-compose.transmission.yml"

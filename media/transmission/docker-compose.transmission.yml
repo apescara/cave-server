@@ -1,0 +1,20 @@
+---
+services:
+  transmission:
+    image: lscr.io/linuxserver/transmission:latest
+    container_name: transmission
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=Etc/UTC
+      - USER=cave
+      - PASS=cave123
+    volumes:
+      - ./config:/config
+      - /mnt/series/downloads:/downloads
+      - /mnt/series/anime:/anime #optional
+    ports:
+      - 9091:9091
+      - 51413:51413
+      - 51413:51413/udp
+    restart: unless-stopped

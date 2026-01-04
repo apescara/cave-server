@@ -14,6 +14,7 @@ services:
       - './config:/config'
       - './logs:/logs'
       - /mnt/series/series:/series
+      - /mnt/series/anime:/anime
       - /mnt/movies/movies:/movies
     extra_hosts:
       - 'host.docker.internal:host-gateway'
