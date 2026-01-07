@@ -7,8 +7,8 @@ services:
       - PUID=1000
       - PGID=1000
       - TZ=Etc/UTC
-      - USER=cave
-      - PASS=cave123
+      - USER=${USER}
+      - PASS=${PASS}
     volumes:
       - ./config:/config
       - /mnt/series/downloads:/downloads
