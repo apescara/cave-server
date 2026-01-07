@@ -14,3 +14,5 @@ services:
       - ./config:/config
       - /mnt/series/downloads:/downloads
       - /mnt/movies/movies:/data
+      - /mnt/series/anime:/anime
+      
