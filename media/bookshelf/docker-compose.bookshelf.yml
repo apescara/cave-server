@@ -1,0 +1,18 @@
+---
+services:
+  bookshelf:
+    image: ghcr.io/pennydreadful/bookshelf:hardcover
+    container_name: bookshelf
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=Etc/UTC
+      - USER=${USER}
+      - PASS=${PASS}
+    volumes:
+      - ~/.config/bookshelf:/config
+      - /mnt/series/downloads:/downloads
+      - /mnt/series/books:/books
+    ports:
+      - 8787:8787
+    restart: unless-stopped
