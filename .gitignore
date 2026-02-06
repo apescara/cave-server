@@ -11,3 +11,30 @@ config/
 appdata/
 cache/
 logs/
+
+# Terraform generated files
+.terraform/
+.terraform.lock.hcl
+*.tfstate
+*.tfstate.*
+crash.log
+*.tfplan
+*.tfplan.binary
+.terraform.tfstate.lock.info
+
+# Terraform variable files (potentially sensitive)
+# Rename these files to a different extension (e.g., .auto.tfvars.enc) and use
+# a secret management tool (e.g., SOPS, Vault) to manage them.
+# The user is responsible for managing sensitive files securely.
+*.tfvars
+*.tfvars.json
+
+# Local override files (often contain personal settings)
+override.tf
+override.tf.json
+*_override.tf
+*_override.tf.json
+
+# Terraform CLI configuration files
+.terraformrc
+terraform.rc
