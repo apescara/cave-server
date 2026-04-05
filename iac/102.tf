@@ -1,6 +1,6 @@
 resource "proxmox_lxc_guest" "basic" {
-  guest_id = 100
-  name     = "jellyfin"
+  guest_id = 102
+  name     = "arr-stack"
   target_node  = "cave"
   password     = var.lxc_password
   unprivileged = true
@@ -17,11 +17,11 @@ resource "proxmox_lxc_guest" "basic" {
     }
 
   cpu {
-        cores = 4
+        cores = 2
     }
 
-  memory = 2048
-  swap = 2048
+  memory = 1024
+  swap = 1024
 
   // Terraform will crash without rootfs defined
   root_mount  {

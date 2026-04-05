@@ -1,6 +1,6 @@
 resource "proxmox_lxc_guest" "basic" {
-  guest_id = 100
-  name     = "jellyfin"
+  guest_id = 101
+  name     = "qbittorrent"
   target_node  = "cave"
   password     = var.lxc_password
   unprivileged = true
@@ -17,11 +17,11 @@ resource "proxmox_lxc_guest" "basic" {
     }
 
   cpu {
-        cores = 4
+        cores = 2
     }
 
-  memory = 2048
-  swap = 2048
+  memory = 1024
+  swap = 1024
 
   // Terraform will crash without rootfs defined
   root_mount  {
@@ -42,13 +42,6 @@ resource "proxmox_lxc_guest" "basic" {
     slot    = "mp0"
     host_path = "/lake1t/data"
     guest_path = "/mnt/lake1t"
-    type= "bind"
-  }
-
-  mount {
-    slot    = "mp1"
-    host_path = "/seagate4t/data"
-    guest_path = "/mnt/seagate4t"
     type= "bind"
   }
 }
