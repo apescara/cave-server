@@ -1,4 +1,4 @@
-resource "proxmox_lxc_guest" "basic" {
+resource "proxmox_lxc_guest" "jellystats" {
   guest_id = 103
   name     = "jellystats"
   target_node  = "cave"

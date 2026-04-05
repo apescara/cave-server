@@ -1,7 +1,6 @@
-resource "proxmox_lxc_guest" "basic" {
+resource "proxmox_lxc_guest" "monitoring" {
   guest_id = 104
-  name     = "monitoring
-  "
+  name     = "monitoring"
   target_node  = "cave"
   password     = var.lxc_password
   unprivileged = true

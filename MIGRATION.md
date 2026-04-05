@@ -10,8 +10,8 @@ Before touching any virtual disks or modifying the ZFS pools, we must ensure all
 - [x] SSH into VM 200 and stop all running Docker containers to prevent data corruption during transfer.
 - [x] Identify the exact mount paths for `toshiba1t` and `seagate4t` inside VM 200 (or on the Proxmox host).
 - [x] Create the target backup directories on `lake1t` directly in the Proxmox host.
-- [ ] Execute `rsync` commands to copy the data.
-- [ ] Verify data integrity (check sizes and file counts) on the destination.
+- [x] Execute `rsync` commands to copy the data.
+- [x] Verify data integrity (check sizes and file counts) on the destination.
 
 ### Bash Commands
 ```bash
@@ -38,8 +38,8 @@ rsync -avhP -e ssh --delete /mnt/series/ root@192.168.100.17:/lake1t/backups/sea
 Once data is verified, we can free up the disks, modify the ZFS pools, and restore the `seagate4t` data back to its original drive.
 
 ### Tasks
-- [ ] Shut down VM 200.
-- [ ] Detach and destroy VM 200's virtual disks located on `seagate4t` and `toshiba1t` via the Proxmox UI.
+- [x] Shut down VM 200.
+- [x] Detach and destroy VM 200's virtual disks located on `seagate4t` and `toshiba1t` via the Proxmox UI.
 - [ ] Wipe the physical `toshiba1t` drive.
 - [ ] Attach the `toshiba1t` drive to the `lake1t` ZFS RAID1 pool.
 - [ ] Restore data from `/lake1t/backups/seagate4t` back to `/seagate4t/data`.
@@ -56,9 +56,9 @@ Once data is verified, we can free up the disks, modify the ZFS pools, and resto
 ls -l /dev/disk/by-id/
 
 # 3. Add toshiba1t to the lake1t pool
-# WARNING: Review topology via `zpool status lake1t` first.
-# Assuming lake1t is a mirror and you are expanding it or adding it properly:
-# zpool add lake1t <vdev-type> /dev/disk/by-id/ata-TOSHIBA-XXX
+# Expand the existing 5-disk raidz1-0 vdev by attaching the new disk directly to it.
+# This will initiate an online RAIDZ expansion.
+zpool attach lake1t raidz1-0 /dev/disk/by-id/ata-TOSHIBA_HDWD110_97T7X4YFS
 
 # 4. Move seagate data back
 mkdir -p /seagate4t/data

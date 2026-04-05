@@ -1,4 +1,4 @@
-resource "proxmox_lxc_guest" "basic" {
+resource "proxmox_lxc_guest" "qbittorrent" {
   guest_id = 101
   name     = "qbittorrent"
   target_node  = "cave"

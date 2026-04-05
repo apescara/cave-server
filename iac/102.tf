@@ -1,4 +1,4 @@
-resource "proxmox_lxc_guest" "basic" {
+resource "proxmox_lxc_guest" "arr_stack" {
   guest_id = 102
   name     = "arr-stack"
   target_node  = "cave"

@@ -1,4 +1,4 @@
-resource "proxmox_lxc_guest" "basic" {
+resource "proxmox_lxc_guest" "jellyfin" {
   guest_id = 100
   name     = "jellyfin"
   target_node  = "cave"
