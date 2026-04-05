@@ -1,5 +1,0 @@
-include:
-  - path: "homarr/docker-compose.homarr.yml"
-  - path: "portainer/docker-compose.portainer.yml"
-  - path: "watchtower/docker-compose.watchtower.yml"
-  - path: "dashdot/docker-compose.dashdot.yml"
