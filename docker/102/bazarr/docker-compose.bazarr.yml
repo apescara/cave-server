@@ -1,0 +1,17 @@
+---
+services:
+  bazarr:
+    image: lscr.io/linuxserver/bazarr:latest
+    container_name: bazarr
+    environment:
+      - PUID=${PUID}
+      - PGID=${PGID}
+      - TZ=${TZ}
+    volumes:
+      - './config:/config'
+      - /mnt/seagate4t/series:/series
+      - /mnt/seagate4t/anime:/anime
+      - /mnt/lake1t/movies:/movies
+    ports:
+      - 6767:6767
+    restart: unless-stopped

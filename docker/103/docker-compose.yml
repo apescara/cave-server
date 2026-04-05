@@ -1,0 +1,3 @@
+include:
+  - path: "jellystat/docker-compose.jellystat.yml"
+  - path: "jellyseerr/docker-compose.jellyseerr.yml"

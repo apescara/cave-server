@@ -1,0 +1,16 @@
+services:
+  filebrowser:
+    image: filebrowser/filebrowser:s6
+    container_name: filebrowser
+    restart: unless-stopped
+    ports:
+      - 58080:80
+    environment:
+      - PUID=${PUID}
+      - PGID=${PGID}
+      - TZ=${TZ}
+    volumes:
+      - ./database:/database
+      - ./config:/config
+      - /mnt/seagate4t:/srv/seagate4t
+      - /mnt/lake1t:/srv/lake1t

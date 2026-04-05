@@ -1,0 +1,2 @@
+include:
+  - path: "jellyfin/docker-compose.jellyfin.yml"

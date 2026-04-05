@@ -1,0 +1,3 @@
+include:
+  - path: "qbittorrent/docker-compose.qbittorrent.yml"
+  - path: "transmission/docker-compose.transmission.yml"
