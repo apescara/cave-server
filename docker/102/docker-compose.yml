@@ -3,4 +3,4 @@ include:
   - path: "radarr/docker-compose.radarr.yml"
   - path: "sonarr/docker-compose.sonarr.yml"
   - path: "bazarr/docker-compose.bazarr.yml"
-  # - path: "bookshelf/docker-compose.bookshelf.yml"
+  - path: "bookshelf/docker-compose.bookshelf.yml"
