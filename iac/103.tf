@@ -4,6 +4,13 @@ resource "proxmox_lxc_guest" "jellystats" {
   target_node  = "cave"
   password     = var.lxc_password
   unprivileged = true
+  start_at_node_boot = true
+
+  startup_shutdown {
+    order            = -1
+    shutdown_timeout = -1
+    startup_delay    = -1
+  }
 
   features {
         unprivileged {
@@ -29,12 +36,15 @@ resource "proxmox_lxc_guest" "jellystats" {
     size    = "8G"
   }
 
+  dns {
+    nameserver = ["1.1.1.1","8.8.8.8"]
+  }
+
   network {
     id = 0
     name   = "eth0"
     bridge = "vmbr0"
     ipv4_dhcp     = true
-    ipv6_dhcp     = true
   }
 
 

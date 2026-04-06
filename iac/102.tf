@@ -4,7 +4,14 @@ resource "proxmox_lxc_guest" "arr_stack" {
   target_node  = "cave"
   password     = var.lxc_password
   unprivileged = true
+  start_at_node_boot = true
 
+  startup_shutdown {
+    order            = -1
+    shutdown_timeout = -1
+    startup_delay    = -1
+  }
+  
   features {
         unprivileged {
             nesting = true

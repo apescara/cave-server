@@ -4,6 +4,13 @@ resource "proxmox_lxc_guest" "jellyfin" {
   target_node  = "cave"
   password     = var.lxc_password
   unprivileged = true
+  start_at_node_boot = true
+
+  startup_shutdown {
+    order            = -1
+    shutdown_timeout = -1
+    startup_delay    = -1
+  }
 
   features {
         unprivileged {
@@ -20,8 +27,8 @@ resource "proxmox_lxc_guest" "jellyfin" {
         cores = 4
     }
 
-  memory = 2048
-  swap = 2048
+  memory = 4096
+  swap = 4096
 
   // Terraform will crash without rootfs defined
   root_mount  {
