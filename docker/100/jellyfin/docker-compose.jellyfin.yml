@@ -1,14 +1,15 @@
 services:
   jellyfin:
-    image: 'jellyfin/jellyfin'
+    image: 'jellyfin/jellyfin:10.10'
     restart: 'unless-stopped'
-    network_mode: 'host'
     environment:
       - PUID=${PUID}
       - PGID=${PGID}
       - TZ=${TZ}
+      - JELLYFIN_PublishedServerUrl=https://jellyfin.dacave.org/
     ports:
-      - 8096:8096
+      - 8096:8096/tcp
+      - 7359:7359/udp
     volumes:
       - './cache:/cache'
       - './config:/config'
