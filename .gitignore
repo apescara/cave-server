@@ -40,3 +40,4 @@ override.tf.json
 terraform.rc
 docker/103/jellystat/postgres-data
 docker/103/jellystat/jellystat-backup-data
+*.db

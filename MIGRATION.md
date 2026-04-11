@@ -174,5 +174,5 @@ resource "proxmox_lxc_guest" "qbittorrent" {
 *(Note: `103.tf` for Seanime will follow the exact same structure as `102.tf` above, customized with its required mount points).*
 
 ### Final Recommendations
-1. **UID/GID Mapping**: Because you are using `unprivileged = true`, the `root` user inside the LXC maps to `100000` on the Proxmox host. Ensure directories like `/seagate4t/data` have the correct ownership/permissions to be writable by your LXC apps, or configure custom `lxc.idmap` rules.
+1. **UID/GID Mapping**: Because you are using `unprivileged = true`, the `root` user inside the LXC maps to `100000` on the Proxmox host. Ensure directories like `/seagate4t/data` have the correct ownership/permissions to be writable by your LXC apps (e.g., `chown -R 100000:100000 /lake1t/data/cave-server/docker/102` on the host), or configure custom `lxc.idmap` rules to map UID 1000 directly.
 2. **GPU Passthrough**: For Jellyfin (101) to utilize the Radeon 5600XT, you will likely need to map `/dev/dri/renderD128` into the LXC via custom `lxc.cgroup2.devices.allow` and `lxc.mount.entry` rules in the Proxmox LXC config file `/etc/pve/lxc/101.conf`.

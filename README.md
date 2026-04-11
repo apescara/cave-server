@@ -33,6 +33,7 @@ apt install docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-co
 Run/stop docker:
 
 ```bash
+cd /mnt/lake1t/cave-server/docker/XXX
 docker compose up -d
 docker compose down
 ```
