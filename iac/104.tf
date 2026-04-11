@@ -3,7 +3,7 @@ resource "proxmox_lxc_guest" "monitoring" {
   name     = "monitoring"
   target_node  = "cave"
   password     = var.lxc_password
-  unprivileged = true
+  privileged = true
   start_at_node_boot = true
 
   startup_shutdown {
@@ -13,7 +13,7 @@ resource "proxmox_lxc_guest" "monitoring" {
   }
   
   features {
-        unprivileged {
+        privileged {
             nesting = true
         }
     }

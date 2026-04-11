@@ -3,7 +3,7 @@ resource "proxmox_lxc_guest" "qbittorrent" {
   name     = "qbittorrent"
   target_node  = "cave"
   password     = var.lxc_password
-  unprivileged = true
+  privileged = true
   start_at_node_boot = true
 
   startup_shutdown {
@@ -13,7 +13,7 @@ resource "proxmox_lxc_guest" "qbittorrent" {
   }
 
   features {
-        unprivileged {
+        privileged {
             nesting = true
         }
     }
@@ -24,11 +24,11 @@ resource "proxmox_lxc_guest" "qbittorrent" {
     }
 
   cpu {
-        cores = 2
+        cores = 1
     }
 
-  memory = 1024
-  swap = 1024
+  memory = 512
+  swap = 512
 
   // Terraform will crash without rootfs defined
   root_mount  {
