@@ -5,7 +5,7 @@ SHARED_UID=1000
 SHARED_GID=1000
 USER_NAME="dockeruser"
 GROUP_NAME="dockerusers"
-LXCS=(100 101 102 103 104)
+LXCS=(100 101 102 103 104 105)
 # Add the base directory for your docker-compose files to ensure config volumes are covered
 MOUNTS=("/lake1t" "/seagate4t" "/lake1t/data/cave-server/docker")
 
