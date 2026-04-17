@@ -1,9 +1,11 @@
 services:
   flaresolverr:
-    image: ghcr.io/flaresolverr/flaresolverr:latest
+    image: 21hsmw/flaresolverr:nodriver
     container_name: flaresolverr
     restart: unless-stopped
+    user: $PUID:$PGID
     environment:
       - LOG_LEVEL=info
+      - LANG=en_US
     ports:
       - 8191:8191
