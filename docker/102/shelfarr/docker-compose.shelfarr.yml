@@ -1,0 +1,18 @@
+services:
+  shelfarr:
+    image: ghcr.io/pedro-revez-silva/shelfarr:latest
+    container_name: shelfarr
+    restart: unless-stopped
+    ports:
+      - "5056:80"
+    volumes:
+      # App data — holds the database and auto-generated secret key (required)
+      - ./data:/rails/storage
+      # Your library + download folders — edit the left side
+      - /mnt/lake1t/audiobooks:/audiobooks
+      - /mnt/lake1t/ebooks:/ebooks
+      - /mnt/lake1t/downloads:/downloads
+    environment:
+      - SOLID_QUEUE_IN_PUMA=1
+      # - PUID=1000      # match the owner of your mounted folders
+      # - PGID=1000

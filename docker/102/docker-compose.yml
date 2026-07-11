@@ -7,3 +7,4 @@ include:
   - path: "flaresolverr/docker-compose.flaresolverr.yml"
   - path: "lazylibrarian/docker-compose.lazylibrarian.yml"
   - path: "audiobookshelf/docker-compose.audiobookshelf.yml"
+  - path: "shelfarr/docker-compose.shelfarr.yml"
