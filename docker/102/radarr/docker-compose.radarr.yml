@@ -20,8 +20,10 @@ services:
     image: ghcr.io/thijmengthn/swaparr:latest
     container_name: swaparr-radarr
     restart: always
+    depends_on:
+      - radarr
     environment:
-      - BASEURL=http://127.0.0.1:7878 # IP or FQDN           (Required)
+      - BASEURL=http://192.168.100.90:7878 # IP or FQDN           (Required)
       - APIKEY=${RADARR_API_KEY}                      # Radarr API Key       (Required)                
       - PLATFORM=radarr               # "radarr", "sonarr".. (Optional) default: radarr
       - TIME_THRESHOLD=2h             # 1d, 6h, 30m, etc..   (Optional) default: 2h    
