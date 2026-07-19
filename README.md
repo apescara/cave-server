@@ -46,3 +46,14 @@ docker compose pull
 docker compose up --force-recreate --build -d
 docker image prune -f
 ```
+
+Jellyfin with GPU:
+
+Using the Community script: 
+
+```bash
+mode=generated var_ctid="106" var_hostname="jellygpu" var_pw="cave281" var_gpu="yes" var_container_storage="local-lvm" bash -c "$(curl -fsSL https://raw.githubusercontent.com/community-scripts/ProxmoxVE/main/ct/jellyfin.sh)"
+
+pct set 106 -mp0 /lake1t/data,mp=/mnt/lake1t
+pct set 106 -mp1 /seagate4t/data,mp=/mnt/seagate4t
+``` 

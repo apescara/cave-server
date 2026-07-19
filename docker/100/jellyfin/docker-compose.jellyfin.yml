@@ -1,12 +1,14 @@
 services:
   jellyfin:
-    image: 'jellyfin/jellyfin:10.10'
+    image: 'jellyfin/jellyfin:latest'
     restart: 'unless-stopped'
     environment:
       - PUID=${PUID}
       - PGID=${PGID}
       - TZ=${TZ}
       - JELLYFIN_PublishedServerUrl=https://jellyfin.dacave.org/
+    group_add:
+      - '122'
     ports:
       - 8096:8096/tcp
       - 7359:7359/udp
@@ -16,5 +18,8 @@ services:
       - './logs:/logs'
       - /mnt/seagate4t:/seagate4t
       - /mnt/lake1t:/lake1t
+    network_mode: 'host'
     extra_hosts:
       - 'host.docker.internal:host-gateway'
+    devices:
+      - /dev/dri/renderD128:/dev/dri/renderD128
