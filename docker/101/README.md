@@ -1,0 +1,1 @@
+Follow https://pve.proxmox.com/wiki/OpenVPN_in_LXC for the tun config for the VPN
