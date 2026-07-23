@@ -1,16 +1,26 @@
 services:
   qbittorrent:
-    image: lscr.io/linuxserver/qbittorrent:latest
+    image: lscr.io/linuxserver/qbittorrent:libtorrentv1
     container_name: qbittorrent
     depends_on:
-      - protonvpn
+      protonvpn:
+        condition: service_healthy
     environment:
       - PUID=${PUID}
       - PGID=${PGID}
       - TZ=${TZ}
       - WEBUI_PORT=${QBITTORRENT_WEBUI_PORT}
+      - TORRENTING_PORT=6881
     volumes:
       - ./config:/config
       - ${PATH_MEDIA}:/downloads
     network_mode: "service:protonvpn"
     restart: unless-stopped
+    healthcheck:
+      test:
+        - CMD-SHELL
+        - curl --fail http://localhost:8080 || exit 1
+      interval: 30s
+      timeout: 3s
+      retries: 3
+      start_period: 60s
