@@ -24,6 +24,10 @@ The host is a Proxmox node named `cave`.
 | 103 | `jellystats` | `docker/103` | Jellystat + PostgreSQL, Jellyseerr | both data mounts |
 | 104 | `monitoring` | `docker/104` | Homarr, File Browser, Watchtower | both data mounts |
 | 105* | `immich` | `docker/105` | Immich + PostgreSQL + Valkey | both data mounts |
+| 106 | `grafana` | NA | Graphana | mode=generated var_ctid="106" var_pw="***" bash -c "$(curl -fsSL https://raw.githubusercontent.com/community-scripts/ProxmoxVE/main/ct/grafana.sh)" |
+| 107 | `influxdb` | NA | InfluxDB | mode=generated var_ctid="107" var_pw="***" bash -c "$(curl -fsSL https://raw.githubu
+sercontent.com/community-scripts/ProxmoxVE/main/ct/influxdb.sh)" |
+
 
 Seanime is separate from the Terraform-managed LXCs and is defined in
 `media/`. It expects `/mnt/series/anime` inside its Docker environment.
