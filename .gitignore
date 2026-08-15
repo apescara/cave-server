@@ -42,3 +42,11 @@ docker/103/jellystat/postgres-data
 docker/103/jellystat/jellystat-backup-data
 *.db
 docker/105/immich/postgres
+docker/101/v2.34.1.zip
+docker/101/vuetorrent.zip
+docker/101/protonvpn/wireguard/wg0.conf
+docker/102/**/*.json
+docker/102/**/*.jpg
+docker/102/**/*.sqlite3*
+docker/102/shelfarr/data/.encryption_keys
+docker/102/shelfarr/data/.secret_key_base
