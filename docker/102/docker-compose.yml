@@ -8,3 +8,4 @@ include:
   # - path: "lazylibrarian/docker-compose.lazylibrarian.yml"
   - path: "audiobookshelf/docker-compose.audiobookshelf.yml"
   - path: "shelfarr/docker-compose.shelfarr.yml"
+  - path: "grimmory/docker-compose.grimmory.yml"
