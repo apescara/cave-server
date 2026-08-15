@@ -67,8 +67,6 @@ cat > "${tmp_dir}/docker.conf" <<'EOF'
 [[inputs.docker]]
   endpoint = "unix:///var/run/docker.sock"
   timeout = "5s"
-  perdevice = true
-  total = true
 EOF
 
 chmod 600 "${tmp_dir}/base.conf" "${tmp_dir}/docker.conf"
