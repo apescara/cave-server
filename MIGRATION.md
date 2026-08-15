@@ -72,13 +72,13 @@ rsync -avhP --delete /lake1t/backups/seagate4t/ /seagate4t/data/
 Deploy the individual LXC containers incrementally using Terraform. We will use the 100s range. Ensure Jellyfin, qBittorrent, and Seanime are isolated.
 
 ### Tasks
-- [ ] Create `101.tf` for Jellyfin.
-- [ ] Create `102.tf` for qBittorrent.
-- [ ] Create `103.tf` for Seanime.
-- [ ] Create `104.tf`+ for grouped/complementary services (e.g., *arr stack).
-- [ ] Apply Terraform configurations (`terraform init` && `terraform apply`).
-- [ ] Migrate the `docker-compose.yml` files for each service to their respective LXCs.
-- [ ] Update your Cloudflare Tunnel configuration to point to the new individual LXC IPs instead of the old VM 200 IP.
+- [X] Create `101.tf` for Jellyfin.
+- [X] Create `102.tf` for qBittorrent.
+- [X] Create `103.tf` for Seanime.
+- [X] Create `104.tf`+ for grouped/complementary services (e.g., *arr stack).
+- [X] Apply Terraform configurations (`terraform init` && `terraform apply`).
+- [X] Migrate the `docker-compose.yml` files for each service to their respective LXCs.
+- [X] Update your Cloudflare Tunnel configuration to point to the new individual LXC IPs instead of the old VM 200 IP.
 
 ### Terraform Examples
 
