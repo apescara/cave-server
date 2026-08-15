@@ -38,8 +38,8 @@ if [[ -n "${HA_URL}" || -n "${HA_TOKEN}" ]]; then
     exit 1
   }
   [[ "${HA_URL}" != */ ]] || HA_URL="${HA_URL%/}"
-  if [[ ! "${HA_LXC_ID}" =~ ^(100|101|102|103|104|105)$ ]]; then
-    echo "HA_LXC_ID must be one of: 100 101 102 103 104 105" >&2
+  if [[ ! "${HA_LXC_ID}" =~ ^(100|101|102|103|104|105|201)$ ]]; then
+    echo "HA_LXC_ID must be one of: 100 101 102 103 104 105 201" >&2
     exit 1
   fi
   ha_enabled=true
@@ -130,7 +130,7 @@ EOF
   chmod 600 "${tmp_dir}/homeassistant.conf" "${tmp_dir}/homeassistant.token"
 fi
 
-for id in 100 101 102 103 104 105; do
+for id in 100 101 102 103 104 105 201; do
   if ! pct status "${id}" >/dev/null 2>&1; then
     echo "LXC ${id}: does not exist; skipping"
     continue
