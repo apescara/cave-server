@@ -1,28 +1,21 @@
 # Updating Docker images
 
 Images are normally updated manually so an upgrade can be observed and
-rolled back. Run the command for the LXC you want to update on the Proxmox
-host. It enters the LXC, pulls configured images, recreates services, and
-prints their status.
+rolled back. Run `update-images.sh` on the Proxmox host. It validates the
+target, prevents concurrent runs, validates Compose configuration, enters the
+LXC, pulls configured images, recreates services, and prints their status.
 
 ```bash
-LXC_ID=102
-pct exec "$LXC_ID" -- bash -lc \
-  'cd /mnt/lake1t/cave-server/docker/'"$LXC_ID"' && \
-   docker compose pull && \
-   docker compose up -d && \
-   docker compose ps'
+./update-images.sh 102
 ```
 
-Equivalent explicit commands:
+Validate configuration without changing anything:
 
 ```bash
-pct exec 100 -- bash -lc 'cd /mnt/lake1t/cave-server/docker/100 && docker compose pull && docker compose up -d && docker compose ps'
-pct exec 101 -- bash -lc 'cd /mnt/lake1t/cave-server/docker/101 && docker compose pull && docker compose up -d && docker compose ps'
-pct exec 102 -- bash -lc 'cd /mnt/lake1t/cave-server/docker/102 && docker compose pull && docker compose up -d && docker compose ps'
-pct exec 103 -- bash -lc 'cd /mnt/lake1t/cave-server/docker/103 && docker compose pull && docker compose up -d && docker compose ps'
-pct exec 104 -- bash -lc 'cd /mnt/lake1t/cave-server/docker/104 && docker compose pull && docker compose up -d && docker compose ps'
-pct exec 105 -- bash -lc 'cd /mnt/lake1t/cave-server/docker/105 && docker compose pull && docker compose up -d && docker compose ps'
+./update-images.sh --check 100 101 102 103 104 105
+
+# Update every LXC, stopping only the failed LXC and reporting failures at end
+./update-images.sh --all
 ```
 
 Before updating a stateful service:
@@ -33,7 +26,9 @@ Before updating a stateful service:
 4. Update one LXC at a time and inspect `docker compose logs --tail=100`.
 5. Verify the application UI and dependent services before continuing.
 
-Avoid `docker system prune --volumes` in routine updates. It can delete
+The script does not make backups. Before updating a stateful service, take a
+known-good backup or Proxmox snapshot according to that service's recovery
+procedure. Avoid `docker system prune --volumes` in routine updates. It can delete
 unused Docker volumes, including data not currently referenced by the Compose
 project. Clean up only after identifying the exact objects to remove.
 

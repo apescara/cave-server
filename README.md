@@ -90,7 +90,9 @@ docker compose pull
 docker compose up -d
 ```
 
-For host-side updates across all LXCs, use [UPDATE_IMAGES.md](UPDATE_IMAGES.md).
+For host-side updates across LXCs, use [`update-images.sh`](update-images.sh)
+and read [UPDATE_IMAGES.md](UPDATE_IMAGES.md). The script validates Compose
+configuration, serializes runs, and reports failed LXCs.
 Do not use `docker system prune --volumes` casually: it can remove unused
 volumes that are not represented by the current Compose project.
 
