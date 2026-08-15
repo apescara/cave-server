@@ -19,15 +19,14 @@ The host is a Proxmox node named `cave`.
 
 | LXC | Name | Compose project | Main services | Mounts |
 | --- | --- | --- | --- | --- |
-| 100 | `jellyfin` | `docker/100` | Jellyfin | `/mnt/lake1t`, `/mnt/seagate4t` |
-| 101 | `qbittorrent` | `docker/101` | qBittorrent + Gluetun/ProtonVPN | `/mnt/lake1t` |
-| 102 | `arr-stack` | `docker/102` | Prowlarr, Radarr, Sonarr, Bazarr, FlareSolverr, AudioBookShelf, Shelfarr | both data mounts |
-| 103 | `jellystats` | `docker/103` | Jellystat + PostgreSQL, Jellyseerr | both data mounts |
-| 104 | `monitoring` | `docker/104` | Homarr, File Browser, Watchtower | both data mounts |
-| 105* | `immich` | `docker/105` | Immich + PostgreSQL + Valkey | both data mounts |
+| 100 | `jellyfin` | [`docker/100`](docker/100/README.md) | Jellyfin | `/mnt/lake1t`, `/mnt/seagate4t` |
+| 101 | `qbittorrent` | [`docker/101`](docker/101/README.md) | qBittorrent + Gluetun/ProtonVPN | `/mnt/lake1t` |
+| 102 | `arr-stack` | [`docker/102`](docker/102/README.md) | Prowlarr, Radarr, Sonarr, Bazarr, FlareSolverr, AudioBookShelf, Shelfarr | both data mounts |
+| 103 | `jellystats` | [`docker/103`](docker/103/README.md) | Jellystat + PostgreSQL, Jellyseerr | both data mounts |
+| 104 | `monitoring` | [`docker/104`](docker/104/README.md) | Homarr, File Browser, Watchtower | both data mounts |
+| 105* | `immich` | [`docker/105`](docker/105/README.md) | Immich + PostgreSQL + Valkey | both data mounts |
 | 106 | `grafana` | NA | Graphana | mode=generated var_ctid="106" var_pw="***" bash -c "$(curl -fsSL https://raw.githubusercontent.com/community-scripts/ProxmoxVE/main/ct/grafana.sh)" |
-| 107 | `influxdb` | NA | InfluxDB | mode=generated var_ctid="107" var_pw="***" bash -c "$(curl -fsSL https://raw.githubu
-sercontent.com/community-scripts/ProxmoxVE/main/ct/influxdb.sh)" |
+| 107 | `influxdb` | NA | InfluxDB | mode=generated var_ctid="107" var_pw="***" bash -c "$(curl -fsSL https://raw.githubusercontent.com/community-scripts/ProxmoxVE/main/ct/influxdb.sh)" |
 
 
 Seanime is separate from the Terraform-managed LXCs and is defined in
