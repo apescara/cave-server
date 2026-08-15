@@ -118,9 +118,10 @@ read -rsp "InfluxDB token: " INFLUX_TOKEN
 echo
 export INFLUX_TOKEN
 
-# Optional: enable Phase 2 from the monitoring LXC (default 104).
+# Optional: enable Phase 2 from an external Telegraf collector.
 # Home Assistant runs in VM 201; use that VM's reachable IP or DNS name.
 export HA_URL="http://<home-assistant-vm-201-ip>:8123"
+export HA_TELEGRAF_LXC_ID=107
 read -rsp "Home Assistant long-lived token: " HA_TOKEN
 echo
 export HA_TOKEN
@@ -210,26 +211,29 @@ pct exec 100 -- systemctl restart telegraf
 
 ### Phase 2: Home Assistant entity metrics
 
-The setup script optionally runs the Home Assistant HTTP input on LXC 104 and
-stores the resulting points in the existing `telegraf` bucket. It connects to
-Home Assistant OS in VM 201, queries its `/api/states` endpoint, and creates a `homeassistant_state`
+The setup script optionally runs the Home Assistant HTTP input on the LXC
+specified by `HA_TELEGRAF_LXC_ID` and stores the resulting points in the
+existing `telegraf` bucket. It connects to Home Assistant OS in VM 201,
+queries its `/api/states` endpoint, and creates a `homeassistant_state`
 measurement with `entity_id`, `state`, and common metadata such as
 `unit_of_measurement`, `device_class`, and `friendly_name`.
 
 Create a Home Assistant long-lived access token from the user profile, then set
 `HA_URL` and `HA_TOKEN` before running the setup script. The token is written
 only to `/etc/telegraf/telegraf.d/homeassistant.token` on the selected LXC,
-with `root:telegraf` ownership and mode `640`; it is not written to Git. To
-use another Telegraf LXC, set `HA_LXC_ID` to one of 100–105.
+with `root:telegraf` ownership and mode `640`; it is not written to Git. Use
+LXC 107 as the default monitoring collector in this setup, or set
+`HA_TELEGRAF_LXC_ID` to another LXC from 100–107. VM 201 must only appear in
+`HA_URL`; it is not a valid `pct` container ID.
 
 Verify the service user can query Home Assistant and that Telegraf emits
 entity metrics:
 
 ```bash
-pct exec 104 -- stat -c '%U:%G %a' \
+pct exec 107 -- stat -c '%U:%G %a' \
   /etc/telegraf/telegraf.d/homeassistant.conf \
   /etc/telegraf/telegraf.d/homeassistant.token
-pct exec 104 -- runuser -u telegraf -- \
+pct exec 107 -- runuser -u telegraf -- \
   telegraf --config /etc/telegraf/telegraf.conf \
   --config-directory /etc/telegraf/telegraf.d \
   --test --input-filter http

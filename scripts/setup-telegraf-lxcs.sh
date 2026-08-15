@@ -13,7 +13,8 @@ set -Eeuo pipefail
 #   INFLUX_BUCKET default: telegraf
 #   HA_URL        Home Assistant base URL, for example http://10.0.0.30:8123
 #   HA_TOKEN      Home Assistant long-lived access token
-#   HA_LXC_ID     LXC that runs the Home Assistant input, default: 104
+#   HA_TELEGRAF_LXC_ID
+#                 LXC that runs the Home Assistant input; required with HA_URL
 
 if [[ ${EUID} -ne 0 ]]; then
   echo "Run this script as root on the Proxmox host." >&2
@@ -26,7 +27,12 @@ INFLUX_ORG="${INFLUX_ORG:-dacave}"
 INFLUX_BUCKET="${INFLUX_BUCKET:-telegraf}"
 HA_URL="${HA_URL:-}"
 HA_TOKEN="${HA_TOKEN:-}"
-HA_LXC_ID="${HA_LXC_ID:-104}"
+HA_TELEGRAF_LXC_ID="${HA_TELEGRAF_LXC_ID:-}"
+
+if [[ -n "${HA_LXC_ID:-}" ]]; then
+  echo "HA_LXC_ID is ambiguous; unset it and use HA_TELEGRAF_LXC_ID for the external collector LXC" >&2
+  exit 1
+fi
 
 if [[ -n "${HA_URL}" || -n "${HA_TOKEN}" ]]; then
   [[ -n "${HA_URL}" ]] || {
@@ -37,9 +43,13 @@ if [[ -n "${HA_URL}" || -n "${HA_TOKEN}" ]]; then
     echo "Set HA_TOKEN when HA_URL is provided" >&2
     exit 1
   }
+  [[ -n "${HA_TELEGRAF_LXC_ID}" ]] || {
+    echo "Set HA_TELEGRAF_LXC_ID to the external Telegraf collector LXC (for example 107); VM 201 is not an LXC" >&2
+    exit 1
+  }
   [[ "${HA_URL}" != */ ]] || HA_URL="${HA_URL%/}"
-  if [[ ! "${HA_LXC_ID}" =~ ^(100|101|102|103|104|105|201)$ ]]; then
-    echo "HA_LXC_ID must be one of: 100 101 102 103 104 105 201" >&2
+  if [[ ! "${HA_TELEGRAF_LXC_ID}" =~ ^(100|101|102|103|104|105|106|107)$ ]]; then
+    echo "HA_TELEGRAF_LXC_ID must be one of: 100 101 102 103 104 105 106 107; VM 201 is not an LXC" >&2
     exit 1
   fi
   ha_enabled=true
@@ -130,7 +140,14 @@ EOF
   chmod 600 "${tmp_dir}/homeassistant.conf" "${tmp_dir}/homeassistant.token"
 fi
 
-for id in 100 101 102 103 104 105 201; do
+telegraf_ids=(100 101 102 103 104 105)
+if [[ "${ha_enabled}" == true ]]; then
+  if [[ ! " ${telegraf_ids[*]} " == *" ${HA_TELEGRAF_LXC_ID} "* ]]; then
+    telegraf_ids+=("${HA_TELEGRAF_LXC_ID}")
+  fi
+fi
+
+for id in "${telegraf_ids[@]}"; do
   if ! pct status "${id}" >/dev/null 2>&1; then
     echo "LXC ${id}: does not exist; skipping"
     continue
@@ -195,7 +212,7 @@ REMOTE_DOCKER_PERMISSIONS
     echo "LXC ${id}: no Docker socket; host metrics only"
   fi
 
-  if [[ "${id}" == "${HA_LXC_ID}" ]]; then
+  if [[ "${id}" == "${HA_TELEGRAF_LXC_ID}" ]]; then
     if [[ "${ha_enabled}" == true ]]; then
       pct push "${id}" "${tmp_dir}/homeassistant.conf" /etc/telegraf/telegraf.d/homeassistant.conf
       pct push "${id}" "${tmp_dir}/homeassistant.token" /etc/telegraf/telegraf.d/homeassistant.token
