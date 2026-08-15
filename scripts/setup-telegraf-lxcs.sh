@@ -11,6 +11,9 @@ set -Eeuo pipefail
 # Optional:
 #   INFLUX_ORG    default: dacave
 #   INFLUX_BUCKET default: telegraf
+#   HA_URL        Home Assistant base URL, for example http://10.0.0.30:8123
+#   HA_TOKEN      Home Assistant long-lived access token
+#   HA_LXC_ID     LXC that runs the Home Assistant input, default: 104
 
 if [[ ${EUID} -ne 0 ]]; then
   echo "Run this script as root on the Proxmox host." >&2
@@ -21,6 +24,28 @@ fi
 : "${INFLUX_TOKEN:?Set INFLUX_TOKEN without committing it to Git}"
 INFLUX_ORG="${INFLUX_ORG:-dacave}"
 INFLUX_BUCKET="${INFLUX_BUCKET:-telegraf}"
+HA_URL="${HA_URL:-}"
+HA_TOKEN="${HA_TOKEN:-}"
+HA_LXC_ID="${HA_LXC_ID:-104}"
+
+if [[ -n "${HA_URL}" || -n "${HA_TOKEN}" ]]; then
+  [[ -n "${HA_URL}" ]] || {
+    echo "Set HA_URL when HA_TOKEN is provided" >&2
+    exit 1
+  }
+  [[ -n "${HA_TOKEN}" ]] || {
+    echo "Set HA_TOKEN when HA_URL is provided" >&2
+    exit 1
+  }
+  [[ "${HA_URL}" != */ ]] || HA_URL="${HA_URL%/}"
+  if [[ ! "${HA_LXC_ID}" =~ ^(100|101|102|103|104|105)$ ]]; then
+    echo "HA_LXC_ID must be one of: 100 101 102 103 104 105" >&2
+    exit 1
+  fi
+  ha_enabled=true
+else
+  ha_enabled=false
+fi
 
 for command_name in pct mktemp; do
   command -v "${command_name}" >/dev/null || {
@@ -71,7 +96,41 @@ EOF
 
 chmod 600 "${tmp_dir}/base.conf" "${tmp_dir}/docker.conf"
 
-for id in 100 101 102 103 104 105 106; do
+if [[ "${ha_enabled}" == true ]]; then
+  cat > "${tmp_dir}/homeassistant.conf" <<EOF
+[[inputs.http]]
+  urls = ["${HA_URL}/api/states"]
+  token_file = "/etc/telegraf/telegraf.d/homeassistant.token"
+  timeout = "10s"
+  data_format = "json_v2"
+
+  [[inputs.http.json_v2]]
+    measurement_name = "homeassistant_state"
+
+    [[inputs.http.json_v2.tag]]
+      path = "entity_id"
+    [[inputs.http.json_v2.tag]]
+      path = "attributes.unit_of_measurement"
+      rename = "unit_of_measurement"
+      optional = true
+    [[inputs.http.json_v2.tag]]
+      path = "attributes.device_class"
+      rename = "device_class"
+      optional = true
+    [[inputs.http.json_v2.field]]
+      path = "state"
+      type = "string"
+    [[inputs.http.json_v2.field]]
+      path = "attributes.friendly_name"
+      rename = "friendly_name"
+      type = "string"
+      optional = true
+EOF
+  printf '%s\n' "${HA_TOKEN}" > "${tmp_dir}/homeassistant.token"
+  chmod 600 "${tmp_dir}/homeassistant.conf" "${tmp_dir}/homeassistant.token"
+fi
+
+for id in 100 101 102 103 104 105; do
   if ! pct status "${id}" >/dev/null 2>&1; then
     echo "LXC ${id}: does not exist; skipping"
     continue
@@ -134,6 +193,24 @@ REMOTE_DOCKER_PERMISSIONS
   else
     pct exec "${id}" -- rm -f /etc/telegraf/telegraf.d/docker.conf
     echo "LXC ${id}: no Docker socket; host metrics only"
+  fi
+
+  if [[ "${id}" == "${HA_LXC_ID}" ]]; then
+    if [[ "${ha_enabled}" == true ]]; then
+      pct push "${id}" "${tmp_dir}/homeassistant.conf" /etc/telegraf/telegraf.d/homeassistant.conf
+      pct push "${id}" "${tmp_dir}/homeassistant.token" /etc/telegraf/telegraf.d/homeassistant.token
+      pct exec "${id}" -- chown root:telegraf \
+        /etc/telegraf/telegraf.d/homeassistant.conf \
+        /etc/telegraf/telegraf.d/homeassistant.token
+      pct exec "${id}" -- chmod 640 \
+        /etc/telegraf/telegraf.d/homeassistant.conf \
+        /etc/telegraf/telegraf.d/homeassistant.token
+      echo "LXC ${id}: Home Assistant metrics enabled"
+    else
+      pct exec "${id}" -- rm -f \
+        /etc/telegraf/telegraf.d/homeassistant.conf \
+        /etc/telegraf/telegraf.d/homeassistant.token
+    fi
   fi
 
   pct exec "${id}" -- telegraf \

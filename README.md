@@ -11,6 +11,7 @@ This repository is the operational source of truth:
 - `fix-perms.sh` repairs permissions on shared media mounts.
 - `MIGRATION.md` records the migration from the old monolithic VM.
 - `UPDATE_IMAGES.md` contains manual image update commands.
+- `scripts/setup-telegraf-lxcs.sh` installs and configures Telegraf across LXCs 100–105.
 
 ## Architecture
 
@@ -93,6 +94,166 @@ docker compose up -d
 docker compose pull
 docker compose up -d
 ```
+
+## Monitoring
+
+InfluxDB 2.x and Grafana are installed directly on the monitoring system. The
+`telegraf` bucket is used for host and Docker metrics; the existing `proxmox`
+bucket remains separate for Proxmox data.
+
+Telegraf is installed directly in each running Docker LXC. The setup script
+collects CPU, memory, swap, disk, disk I/O, network, kernel, and process
+metrics. When `/var/run/docker.sock` exists, it also collects Docker container
+metrics. Telegraf is not installed inside individual containers.
+
+Run the setup script from the Proxmox host as root. It skips missing or stopped
+LXCs and installs Telegraf from the official InfluxData APT repository when it
+is not already present:
+
+```bash
+export INFLUX_URL="http://<monitoring-lxc-ip>:8086"
+export INFLUX_ORG="dacave"
+export INFLUX_BUCKET="telegraf"
+read -rsp "InfluxDB token: " INFLUX_TOKEN
+echo
+export INFLUX_TOKEN
+
+# Optional: enable Phase 2 from the monitoring LXC (default 104).
+# Home Assistant runs in VM 201; use that VM's reachable IP or DNS name.
+export HA_URL="http://<home-assistant-vm-201-ip>:8123"
+read -rsp "Home Assistant long-lived token: " HA_TOKEN
+echo
+export HA_TOKEN
+
+./scripts/setup-telegraf-lxcs.sh
+```
+
+The token is supplied through the environment and is not stored in Git. The
+target bucket must exist before running the script:
+
+```bash
+influx bucket create --name telegraf --org dacave --retention 90d
+```
+
+Check a deployed agent with:
+
+```bash
+pct exec 100 -- systemctl status telegraf --no-pager
+pct exec 100 -- journalctl -u telegraf -n 30 --no-pager
+```
+
+### Phase 1: verify Docker metrics
+
+Run these checks on the Proxmox host for every running Docker LXC (100–105):
+
+```bash
+for id in 100 101 102 103 104 105; do
+  echo "=== LXC ${id} ==="
+  pct exec "${id}" -- systemctl is-active --quiet telegraf \
+    && echo "telegraf: active" || echo "telegraf: NOT active"
+  pct exec "${id}" -- test -S /var/run/docker.sock \
+    && echo "docker socket: present" || echo "docker socket: absent"
+  pct exec "${id}" -- getent group docker || true
+  pct exec "${id}" -- id telegraf
+done
+```
+
+On an LXC where the Docker socket is present, verify that the Telegraf service
+user can query Docker and that the input emits data:
+
+```bash
+pct exec 100 -- runuser -u telegraf -- \
+  telegraf --config /etc/telegraf/telegraf.conf \
+  --config-directory /etc/telegraf/telegraf.d \
+  --test --input-filter docker
+```
+
+The output should include `docker`, `docker_container_status`, and usually
+`docker_container_cpu`, `docker_container_mem`, and
+`docker_container_net`. The exact set depends on the Docker engine and
+container state. The Docker input requires access to the Docker Engine API;
+the configured Unix socket and membership in the `docker` group provide that
+access.
+
+Confirm that points are arriving in InfluxDB before building dashboards:
+
+```bash
+influx query --org dacave '
+from(bucket: "telegraf")
+  |> range(start: -15m)
+  |> filter(fn: (r) => r._measurement =~ /^docker/)
+  |> limit(n: 20)
+'
+```
+
+In Grafana Explore, select the InfluxDB data source and run the same Flux
+query. At least one recent row should be visible, with tags such as
+`engine_host`, `container_name`, and `container_status`. A useful first panel
+query is:
+
+```flux
+from(bucket: "telegraf")
+  |> range(start: v.timeRangeStart, stop: v.timeRangeStop)
+  |> filter(fn: (r) => r._measurement == "docker_container_status")
+  |> filter(fn: (r) => r._field == "uptime_ns")
+  |> group(columns: ["engine_host", "container_name"])
+```
+
+Do not paste the Influx token into the query editor, screenshots, or this
+repository. If the service-user test fails, check the socket ownership and
+restart Telegraf after changing group membership:
+
+```bash
+pct exec 100 -- stat -c '%U:%G %a' /var/run/docker.sock
+pct exec 100 -- systemctl restart telegraf
+```
+
+### Phase 2: Home Assistant entity metrics
+
+The setup script optionally runs the Home Assistant HTTP input on LXC 104 and
+stores the resulting points in the existing `telegraf` bucket. It connects to
+Home Assistant OS in VM 201, queries its `/api/states` endpoint, and creates a `homeassistant_state`
+measurement with `entity_id`, `state`, and common metadata such as
+`unit_of_measurement`, `device_class`, and `friendly_name`.
+
+Create a Home Assistant long-lived access token from the user profile, then set
+`HA_URL` and `HA_TOKEN` before running the setup script. The token is written
+only to `/etc/telegraf/telegraf.d/homeassistant.token` on the selected LXC,
+with `root:telegraf` ownership and mode `640`; it is not written to Git. To
+use another Telegraf LXC, set `HA_LXC_ID` to one of 100–105.
+
+Verify the service user can query Home Assistant and that Telegraf emits
+entity metrics:
+
+```bash
+pct exec 104 -- stat -c '%U:%G %a' \
+  /etc/telegraf/telegraf.d/homeassistant.conf \
+  /etc/telegraf/telegraf.d/homeassistant.token
+pct exec 104 -- runuser -u telegraf -- \
+  telegraf --config /etc/telegraf/telegraf.conf \
+  --config-directory /etc/telegraf/telegraf.d \
+  --test --input-filter http
+```
+
+The test output should include `homeassistant_state` rows. Confirm that the
+points reach InfluxDB:
+
+```bash
+influx query --org dacave '
+from(bucket: "telegraf")
+  |> range(start: -15m)
+  |> filter(fn: (r) => r._measurement == "homeassistant_state")
+  |> filter(fn: (r) => r._field == "state")
+  |> limit(n: 20)
+'
+```
+
+In Grafana Explore, use the same query and group or filter by `entity_id`.
+`state` is intentionally stored as a string because Home Assistant also
+returns non-numeric states such as `on`, `off`, and `unavailable`.
+
+The next monitoring phases are ZFS/SMART and temperature data, network
+equipment, service uptime checks, Grafana dashboards, and alert rules.
 
 For host-side updates across LXCs, use [`update-images.sh`](update-images.sh)
 and read [UPDATE_IMAGES.md](UPDATE_IMAGES.md). The script validates Compose
