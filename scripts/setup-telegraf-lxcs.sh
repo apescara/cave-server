@@ -92,6 +92,26 @@ export DEBIAN_FRONTEND=noninteractive
 
 if ! command -v telegraf >/dev/null 2>&1; then
   apt-get update
+  apt-get install -y ca-certificates curl gnupg
+  install -d -m 0755 /etc/apt/keyrings
+
+  key_file="/tmp/influxdata-archive.key"
+  curl --fail --silent --show-error --location \
+    -o "${key_file}" \
+    https://repos.influxdata.com/influxdata-archive.key
+
+  gpg --show-keys --with-fingerprint --with-colons "${key_file}" 2>&1 \
+    | grep -q '^fpr:\+24C975CBA61A024EE1B631787C3D57159FC2F927:$'
+
+  gpg --dearmor --yes \
+    --output /etc/apt/keyrings/influxdata-archive.gpg "${key_file}"
+  rm -f "${key_file}"
+
+  printf '%s\n' \
+    'deb [signed-by=/etc/apt/keyrings/influxdata-archive.gpg] https://repos.influxdata.com/debian stable main' \
+    > /etc/apt/sources.list.d/influxdata.list
+
+  apt-get update
   apt-get install -y telegraf
 fi
 
