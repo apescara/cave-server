@@ -1,16 +1,16 @@
-# Graph Report - cave-server  (2026-08-22)
+# Graph Report - cave-server  (2026-08-15)
 
 ## Corpus Check
-- 25 files · ~10,001 words
+- 24 files · ~9,336 words
 - Verdict: corpus is large enough that graph structure adds value.
 
 ## Summary
-- 109 nodes · 95 edges · 27 communities (14 shown, 13 thin omitted)
-- Extraction: 97% EXTRACTED · 3% INFERRED · 0% AMBIGUOUS · INFERRED: 3 edges (avg confidence: 0.88)
+- 99 nodes · 83 edges · 27 communities (14 shown, 13 thin omitted)
+- Extraction: 96% EXTRACTED · 4% INFERRED · 0% AMBIGUOUS · INFERRED: 3 edges (avg confidence: 0.88)
 - Token cost: 0 input · 0 output
 
 ## Graph Freshness
-- Built from commit: `bb2eeb37`
+- Built from commit: `55510152`
 - Run `git rev-parse HEAD` and compare to check if the graph is stale.
 - Run `graphify update .` after code changes (no API cost).
 
@@ -19,7 +19,7 @@
 - update-images.sh
 - Migration plan VM 200 to multi-LXC architecture
 - radarr
-- move-anime-seasons.sh
+- Repository operational architecture
 - docker/102 Compose project
 - docker/101 Compose project
 - immich-server
@@ -48,12 +48,12 @@
 2. `radarr` - 5 edges
 3. `sonarr` - 5 edges
 4. `Repository operational architecture` - 5 edges
-5. `move-anime-seasons.sh script` - 4 edges
-6. `LXC 100 — Jellyfin` - 4 edges
-7. `LXC 101 — qBittorrent` - 4 edges
-8. `LXC 102 — Arr stack` - 4 edges
-9. `LXC 103 — Jellystat and Jellyseerr` - 4 edges
-10. `LXC 104 — Monitoring and service portal` - 4 edges
+5. `LXC 100 — Jellyfin` - 4 edges
+6. `LXC 101 — qBittorrent` - 4 edges
+7. `LXC 102 — Arr stack` - 4 edges
+8. `LXC 103 — Jellystat and Jellyseerr` - 4 edges
+9. `LXC 104 — Monitoring and service portal` - 4 edges
+10. `LXC 105 — Immich` - 4 edges
 
 ## Surprising Connections (you probably didn't know these)
 - `Jellyfin Compose service` --references--> `Jellyfin GPU passthrough`  [INFERRED]
@@ -81,16 +81,16 @@ Cohesion: 0.36
 Nodes (7): check_id(), contains_id(), LOCK_FILE, REPO_ROOT, update-images.sh script, usage(), VALID_IDS
 
 ### Community 2 - "Migration plan VM 200 to multi-LXC architecture"
-Cohesion: 0.14
-Nodes (14): docker/100 Compose project, Jellyfin Compose service, Jellyfin GPU passthrough, Migration plan VM 200 to multi-LXC architecture, rsync data backup, Terraform-managed LXCs, ZFS RAIDZ expansion, Grafana (+6 more)
+Cohesion: 0.29
+Nodes (7): docker/100 Compose project, Jellyfin Compose service, Jellyfin GPU passthrough, Migration plan VM 200 to multi-LXC architecture, rsync data backup, Terraform-managed LXCs, ZFS RAIDZ expansion
 
 ### Community 3 - "radarr"
 Cohesion: 0.52
 Nodes (7): lazylibrarian, radarr, swaparr-radarr, shelfarr, sonarr, swaparr-sonarr, filebrowser
 
-### Community 4 - "move-anime-seasons.sh"
-Cohesion: 0.27
-Nodes (8): die(), record(), rule_end, rule_season, rule_start, season_rules, move-anime-seasons.sh script, usage()
+### Community 4 - "Repository operational architecture"
+Cohesion: 0.29
+Nodes (7): Grafana, InfluxDB telegraf bucket, LXC 100 Jellyfin, LXC 101 qBittorrent, LXC 102 arr-stack, Repository operational architecture, Telegraf LXC monitoring
 
 ### Community 5 - "docker/102 Compose project"
 Cohesion: 0.40
@@ -129,14 +129,16 @@ Cohesion: 0.40
 Nodes (4): Active Compose services, LXC 104 — Monitoring and service portal, LXC definition, Operations
 
 ## Knowledge Gaps
-- **60 isolated node(s):** `fix-perms.sh script`, `season_rules`, `rule_start`, `rule_end`, `rule_season` (+55 more)
+- **56 isolated node(s):** `fix-perms.sh script`, `setup-telegraf-lxcs.sh script`, `REPO_ROOT`, `LOCK_FILE`, `VALID_IDS` (+51 more)
   These have ≤1 connection - possible missing edges or undocumented components.
 - **13 thin communities (<3 nodes) omitted from report** — run `graphify query` to explore isolated nodes.
 
 ## Suggested Questions
 _Questions this graph is uniquely positioned to answer:_
 
-- **What connects `fix-perms.sh script`, `season_rules`, `rule_start` to the rest of the system?**
-  _60 weakly-connected nodes found - possible documentation gaps or missing edges._
-- **Should `Migration plan VM 200 to multi-LXC architecture` be split into smaller, more focused modules?**
-  _Cohesion score 0.14285714285714285 - nodes in this community are weakly interconnected._
+- **Why does `Migration plan VM 200 to multi-LXC architecture` connect `Migration plan VM 200 to multi-LXC architecture` to `Repository operational architecture`?**
+  _High betweenness centrality (0.011) - this node is a cross-community bridge._
+- **Why does `Repository operational architecture` connect `Repository operational architecture` to `Migration plan VM 200 to multi-LXC architecture`?**
+  _High betweenness centrality (0.011) - this node is a cross-community bridge._
+- **What connects `fix-perms.sh script`, `setup-telegraf-lxcs.sh script`, `REPO_ROOT` to the rest of the system?**
+  _56 weakly-connected nodes found - possible documentation gaps or missing edges._

@@ -517,156 +517,6 @@
       "norm_label": "graphify"
     },
     {
-      "label": "move-anime-seasons.sh",
-      "file_type": "code",
-      "source_file": "scripts/move-anime-seasons.sh",
-      "source_location": "L1",
-      "metadata": {
-        "language": "bash",
-        "kind": "file"
-      },
-      "_origin": "ast",
-      "id": "scripts_move_anime_seasons",
-      "community": 4,
-      "community_name": "move-anime-seasons.sh",
-      "norm_label": "move-anime-seasons.sh"
-    },
-    {
-      "label": "die()",
-      "file_type": "code",
-      "source_file": "scripts/move-anime-seasons.sh",
-      "source_location": "L39",
-      "metadata": {
-        "language": "bash",
-        "kind": "bash_function"
-      },
-      "_origin": "ast",
-      "id": "scripts_move_anime_seasons_die",
-      "community": 4,
-      "community_name": "move-anime-seasons.sh",
-      "norm_label": "die()"
-    },
-    {
-      "label": "record()",
-      "file_type": "code",
-      "source_file": "scripts/move-anime-seasons.sh",
-      "source_location": "L86",
-      "metadata": {
-        "language": "bash",
-        "kind": "bash_function"
-      },
-      "_origin": "ast",
-      "id": "scripts_move_anime_seasons_record",
-      "community": 4,
-      "community_name": "move-anime-seasons.sh",
-      "norm_label": "record()"
-    },
-    {
-      "label": "rule_end",
-      "file_type": "code",
-      "source_file": "scripts/move-anime-seasons.sh",
-      "source_location": "L64",
-      "metadata": {
-        "language": "bash",
-        "kind": "code"
-      },
-      "_origin": "ast",
-      "id": "scripts_move_anime_seasons_rule_end",
-      "community": 4,
-      "community_name": "move-anime-seasons.sh",
-      "norm_label": "rule_end"
-    },
-    {
-      "label": "rule_season",
-      "file_type": "code",
-      "source_file": "scripts/move-anime-seasons.sh",
-      "source_location": "L64",
-      "metadata": {
-        "language": "bash",
-        "kind": "code"
-      },
-      "_origin": "ast",
-      "id": "scripts_move_anime_seasons_rule_season",
-      "community": 4,
-      "community_name": "move-anime-seasons.sh",
-      "norm_label": "rule_season"
-    },
-    {
-      "label": "rule_start",
-      "file_type": "code",
-      "source_file": "scripts/move-anime-seasons.sh",
-      "source_location": "L64",
-      "metadata": {
-        "language": "bash",
-        "kind": "code"
-      },
-      "_origin": "ast",
-      "id": "scripts_move_anime_seasons_rule_start",
-      "community": 4,
-      "community_name": "move-anime-seasons.sh",
-      "norm_label": "rule_start"
-    },
-    {
-      "label": "season_for_episode()",
-      "file_type": "code",
-      "source_file": "scripts/move-anime-seasons.sh",
-      "source_location": "L91",
-      "metadata": {
-        "language": "bash",
-        "kind": "bash_function"
-      },
-      "_origin": "ast",
-      "id": "scripts_move_anime_seasons_season_for_episode",
-      "community": 4,
-      "community_name": "move-anime-seasons.sh",
-      "norm_label": "season_for_episode()"
-    },
-    {
-      "label": "season_rules",
-      "file_type": "code",
-      "source_file": "scripts/move-anime-seasons.sh",
-      "source_location": "L37",
-      "metadata": {
-        "language": "bash",
-        "kind": "code"
-      },
-      "_origin": "ast",
-      "id": "scripts_move_anime_seasons_season_rules",
-      "community": 4,
-      "community_name": "move-anime-seasons.sh",
-      "norm_label": "season_rules"
-    },
-    {
-      "label": "move-anime-seasons.sh script",
-      "file_type": "code",
-      "source_file": "scripts/move-anime-seasons.sh",
-      "source_location": "L1",
-      "metadata": {
-        "language": "bash",
-        "kind": "bash_entrypoint"
-      },
-      "_origin": "ast",
-      "id": "scripts_move_anime_seasons_sh__entry",
-      "community": 4,
-      "community_name": "move-anime-seasons.sh",
-      "norm_label": "move-anime-seasons.sh script"
-    },
-    {
-      "label": "usage()",
-      "file_type": "code",
-      "source_file": "scripts/move-anime-seasons.sh",
-      "source_location": "L7",
-      "metadata": {
-        "language": "bash",
-        "kind": "bash_function"
-      },
-      "_origin": "ast",
-      "id": "scripts_move_anime_seasons_usage",
-      "community": 4,
-      "community_name": "move-anime-seasons.sh",
-      "norm_label": "usage()"
-    },
-    {
       "label": "fix-perms.sh",
       "file_type": "code",
       "source_file": "scripts/fix-perms.sh",
@@ -1042,96 +892,6 @@
       "id": "migration_zfs_raidz_expansion"
     },
     {
-      "label": "Grafana",
-      "file_type": "concept",
-      "source_file": "README.md",
-      "source_location": null,
-      "source_url": null,
-      "captured_at": null,
-      "author": null,
-      "contributor": null,
-      "community": 2,
-      "community_name": "Migration plan VM 200 to multi-LXC architecture",
-      "norm_label": "grafana",
-      "_origin": "semantic",
-      "id": "readme_grafana"
-    },
-    {
-      "label": "InfluxDB telegraf bucket",
-      "file_type": "concept",
-      "source_file": "README.md",
-      "source_location": null,
-      "source_url": null,
-      "captured_at": null,
-      "author": null,
-      "contributor": null,
-      "community": 2,
-      "community_name": "Migration plan VM 200 to multi-LXC architecture",
-      "norm_label": "influxdb telegraf bucket",
-      "_origin": "semantic",
-      "id": "readme_influxdb"
-    },
-    {
-      "label": "LXC 100 Jellyfin",
-      "file_type": "concept",
-      "source_file": "README.md",
-      "source_location": null,
-      "source_url": null,
-      "captured_at": null,
-      "author": null,
-      "contributor": null,
-      "community": 2,
-      "community_name": "Migration plan VM 200 to multi-LXC architecture",
-      "norm_label": "lxc 100 jellyfin",
-      "_origin": "semantic",
-      "id": "readme_lxc_100_jellyfin"
-    },
-    {
-      "label": "LXC 101 qBittorrent",
-      "file_type": "concept",
-      "source_file": "README.md",
-      "source_location": null,
-      "source_url": null,
-      "captured_at": null,
-      "author": null,
-      "contributor": null,
-      "community": 2,
-      "community_name": "Migration plan VM 200 to multi-LXC architecture",
-      "norm_label": "lxc 101 qbittorrent",
-      "_origin": "semantic",
-      "id": "readme_lxc_101_qbittorrent"
-    },
-    {
-      "label": "LXC 102 arr-stack",
-      "file_type": "concept",
-      "source_file": "README.md",
-      "source_location": null,
-      "source_url": null,
-      "captured_at": null,
-      "author": null,
-      "contributor": null,
-      "community": 2,
-      "community_name": "Migration plan VM 200 to multi-LXC architecture",
-      "norm_label": "lxc 102 arr-stack",
-      "_origin": "semantic",
-      "id": "readme_lxc_102_arr_stack"
-    },
-    {
-      "label": "Telegraf LXC monitoring",
-      "file_type": "concept",
-      "source_file": "README.md",
-      "source_location": null,
-      "source_url": null,
-      "captured_at": null,
-      "author": null,
-      "contributor": null,
-      "community": 2,
-      "community_name": "Migration plan VM 200 to multi-LXC architecture",
-      "norm_label": "telegraf lxc monitoring",
-      "_origin": "semantic",
-      "id": "readme_telegraf_monitoring"
-    },
-    {
       "label": "Migration plan VM 200 to multi-LXC architecture",
       "file_type": "document",
       "source_file": "MIGRATION.md",
@@ -1145,21 +905,6 @@
       "norm_label": "migration plan vm 200 to multi-lxc architecture",
       "_origin": "semantic",
       "id": "migration_migration_plan"
-    },
-    {
-      "label": "Repository operational architecture",
-      "file_type": "document",
-      "source_file": "README.md",
-      "source_location": null,
-      "source_url": null,
-      "captured_at": null,
-      "author": null,
-      "contributor": null,
-      "community": 2,
-      "community_name": "Migration plan VM 200 to multi-LXC architecture",
-      "norm_label": "repository operational architecture",
-      "_origin": "semantic",
-      "id": "readme_repository_architecture"
     },
     {
       "label": "Jellyfin GPU passthrough",
@@ -1280,6 +1025,111 @@
       "norm_label": "filebrowser",
       "_origin": "semantic",
       "id": "docker_104_filebrowser_docker_compose_filebrowser_filebrowser"
+    },
+    {
+      "label": "Grafana",
+      "file_type": "concept",
+      "source_file": "README.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "community": 4,
+      "community_name": "Repository operational architecture",
+      "norm_label": "grafana",
+      "_origin": "semantic",
+      "id": "readme_grafana"
+    },
+    {
+      "label": "InfluxDB telegraf bucket",
+      "file_type": "concept",
+      "source_file": "README.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "community": 4,
+      "community_name": "Repository operational architecture",
+      "norm_label": "influxdb telegraf bucket",
+      "_origin": "semantic",
+      "id": "readme_influxdb"
+    },
+    {
+      "label": "LXC 100 Jellyfin",
+      "file_type": "concept",
+      "source_file": "README.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "community": 4,
+      "community_name": "Repository operational architecture",
+      "norm_label": "lxc 100 jellyfin",
+      "_origin": "semantic",
+      "id": "readme_lxc_100_jellyfin"
+    },
+    {
+      "label": "LXC 101 qBittorrent",
+      "file_type": "concept",
+      "source_file": "README.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "community": 4,
+      "community_name": "Repository operational architecture",
+      "norm_label": "lxc 101 qbittorrent",
+      "_origin": "semantic",
+      "id": "readme_lxc_101_qbittorrent"
+    },
+    {
+      "label": "LXC 102 arr-stack",
+      "file_type": "concept",
+      "source_file": "README.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "community": 4,
+      "community_name": "Repository operational architecture",
+      "norm_label": "lxc 102 arr-stack",
+      "_origin": "semantic",
+      "id": "readme_lxc_102_arr_stack"
+    },
+    {
+      "label": "Telegraf LXC monitoring",
+      "file_type": "concept",
+      "source_file": "README.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "community": 4,
+      "community_name": "Repository operational architecture",
+      "norm_label": "telegraf lxc monitoring",
+      "_origin": "semantic",
+      "id": "readme_telegraf_monitoring"
+    },
+    {
+      "label": "Repository operational architecture",
+      "file_type": "document",
+      "source_file": "README.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "community": 4,
+      "community_name": "Repository operational architecture",
+      "norm_label": "repository operational architecture",
+      "_origin": "semantic",
+      "id": "readme_repository_architecture"
     },
     {
       "label": "Audiobookshelf service",
@@ -1508,42 +1358,6 @@
     }
   ],
   "links": [
-    {
-      "relation": "calls",
-      "confidence": "EXTRACTED",
-      "source_file": "scripts/move-anime-seasons.sh",
-      "source_location": "L103",
-      "weight": 1.0,
-      "context": "call",
-      "_origin": "ast",
-      "source": "scripts_move_anime_seasons_sh__entry",
-      "target": "scripts_move_anime_seasons_record",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "calls",
-      "confidence": "EXTRACTED",
-      "source_file": "scripts/move-anime-seasons.sh",
-      "source_location": "L43",
-      "weight": 1.0,
-      "context": "call",
-      "_origin": "ast",
-      "source": "scripts_move_anime_seasons_sh__entry",
-      "target": "scripts_move_anime_seasons_die",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "calls",
-      "confidence": "EXTRACTED",
-      "source_file": "scripts/move-anime-seasons.sh",
-      "source_location": "L50",
-      "weight": 1.0,
-      "context": "call",
-      "_origin": "ast",
-      "source": "scripts_move_anime_seasons_sh__entry",
-      "target": "scripts_move_anime_seasons_usage",
-      "confidence_score": 1.0
-    },
     {
       "relation": "calls",
       "confidence": "EXTRACTED",
@@ -1880,17 +1694,6 @@
     {
       "relation": "contains",
       "confidence": "EXTRACTED",
-      "source_file": "scripts/move-anime-seasons.sh",
-      "source_location": "L1",
-      "weight": 1.0,
-      "_origin": "ast",
-      "source": "scripts_move_anime_seasons",
-      "target": "scripts_move_anime_seasons_sh__entry",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
       "source_file": "scripts/setup-telegraf-lxcs.sh",
       "source_location": "L1",
       "weight": 1.0,
@@ -1908,94 +1711,6 @@
       "_origin": "ast",
       "source": "scripts_update_images",
       "target": "scripts_update_images_sh__entry",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "defines",
-      "confidence": "EXTRACTED",
-      "source_file": "scripts/move-anime-seasons.sh",
-      "source_location": "L37",
-      "weight": 1.0,
-      "_origin": "ast",
-      "source": "scripts_move_anime_seasons",
-      "target": "scripts_move_anime_seasons_season_rules",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "defines",
-      "confidence": "EXTRACTED",
-      "source_file": "scripts/move-anime-seasons.sh",
-      "source_location": "L39",
-      "weight": 1.0,
-      "_origin": "ast",
-      "source": "scripts_move_anime_seasons",
-      "target": "scripts_move_anime_seasons_die",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "defines",
-      "confidence": "EXTRACTED",
-      "source_file": "scripts/move-anime-seasons.sh",
-      "source_location": "L64",
-      "weight": 1.0,
-      "_origin": "ast",
-      "source": "scripts_move_anime_seasons",
-      "target": "scripts_move_anime_seasons_rule_end",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "defines",
-      "confidence": "EXTRACTED",
-      "source_file": "scripts/move-anime-seasons.sh",
-      "source_location": "L64",
-      "weight": 1.0,
-      "_origin": "ast",
-      "source": "scripts_move_anime_seasons",
-      "target": "scripts_move_anime_seasons_rule_season",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "defines",
-      "confidence": "EXTRACTED",
-      "source_file": "scripts/move-anime-seasons.sh",
-      "source_location": "L64",
-      "weight": 1.0,
-      "_origin": "ast",
-      "source": "scripts_move_anime_seasons",
-      "target": "scripts_move_anime_seasons_rule_start",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "defines",
-      "confidence": "EXTRACTED",
-      "source_file": "scripts/move-anime-seasons.sh",
-      "source_location": "L7",
-      "weight": 1.0,
-      "_origin": "ast",
-      "source": "scripts_move_anime_seasons",
-      "target": "scripts_move_anime_seasons_usage",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "defines",
-      "confidence": "EXTRACTED",
-      "source_file": "scripts/move-anime-seasons.sh",
-      "source_location": "L86",
-      "weight": 1.0,
-      "_origin": "ast",
-      "source": "scripts_move_anime_seasons",
-      "target": "scripts_move_anime_seasons_record",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "defines",
-      "confidence": "EXTRACTED",
-      "source_file": "scripts/move-anime-seasons.sh",
-      "source_location": "L91",
-      "weight": 1.0,
-      "_origin": "ast",
-      "source": "scripts_move_anime_seasons",
-      "target": "scripts_move_anime_seasons_season_for_episode",
       "confidence_score": 1.0
     },
     {
@@ -2561,5 +2276,5 @@
     }
   ],
   "hyperedges": [],
-  "built_at_commit": "bb2eeb37ed4a538fd992a5c66d091c3890d7d04f"
+  "built_at_commit": "555101523e1797845787daa22c33d6b29d846057"
 }

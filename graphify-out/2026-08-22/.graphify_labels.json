@@ -3,7 +3,7 @@
   "1": "update-images.sh",
   "2": "Migration plan VM 200 to multi-LXC architecture",
   "3": "radarr",
-  "4": "move-anime-seasons.sh",
+  "4": "Repository operational architecture",
   "5": "docker/102 Compose project",
   "6": "docker/101 Compose project",
   "7": "immich-server",
