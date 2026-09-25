@@ -6,8 +6,8 @@
 - Unclassified: 7 file(s) not represented in the graph (top: (none) 7)
 
 ## Summary
-- 137 nodes · 135 edges · 29 communities (14 shown, 15 thin omitted)
-- Extraction: 98% EXTRACTED · 2% INFERRED · 0% AMBIGUOUS · INFERRED: 3 edges (avg confidence: 0.88)
+- 115 nodes · 106 edges · 28 communities (13 shown, 15 thin omitted)
+- Extraction: 97% EXTRACTED · 3% INFERRED · 0% AMBIGUOUS · INFERRED: 3 edges (avg confidence: 0.88)
 - Token cost: 0 input · 0 output
 
 ## Graph Freshness
@@ -40,40 +40,39 @@
 - LXC 100 — Jellyfin
 - Migration plan VM 200 to multi-LXC architecture
 - Backups
-- Terraform module: iac
-- LXC 101 — qBittorrent
+- LXC 103 — Jellystat and Jellyseerr
+- LXC 104 — Monitoring and service portal
 - AGENTS.md
 - backup-critical-data.sh
-- LXC 102 — Arr stack
 
 ## God Nodes (most connected - your core abstractions)
 1. `Repository operational architecture` - 11 edges
-2. `Terraform module: iac` - 9 edges
-3. `var.lxc_password` - 7 edges
-4. `move-anime-seasons.sh script` - 5 edges
-5. `Migration plan VM 200 to multi-LXC architecture` - 5 edges
-6. `radarr` - 5 edges
-7. `sonarr` - 5 edges
-8. `LXC 100 — Jellyfin` - 4 edges
-9. `LXC 101 — qBittorrent` - 4 edges
-10. `LXC 102 — Arr stack` - 4 edges
+2. `move-anime-seasons.sh script` - 5 edges
+3. `Migration plan VM 200 to multi-LXC architecture` - 5 edges
+4. `radarr` - 5 edges
+5. `sonarr` - 5 edges
+6. `LXC 100 — Jellyfin` - 4 edges
+7. `LXC 101 — qBittorrent` - 4 edges
+8. `LXC 102 — Arr stack` - 4 edges
+9. `LXC 103 — Jellystat and Jellyseerr` - 4 edges
+10. `LXC 104 — Monitoring and service portal` - 4 edges
 
 ## Surprising Connections (you probably didn't know these)
-- `Repository operational architecture` --references--> `Migration plan VM 200 to multi-LXC architecture`  [EXTRACTED]
-  README.md → MIGRATION.md
 - `Jellyfin Compose service` --references--> `Jellyfin GPU passthrough`  [INFERRED]
   docker/100/jellyfin/docker-compose.jellyfin.yml → MIGRATION.md
+- `Repository operational architecture` --references--> `Migration plan VM 200 to multi-LXC architecture`  [EXTRACTED]
+  README.md → MIGRATION.md
 - `lazylibrarian` --semantically_similar_to--> `shelfarr`  [INFERRED] [semantically similar]
   docker/102/lazylibrarian/docker-compose.lazylibrarian.yml → docker/102/shelfarr/docker-compose.shelfarr.yml
-- `proxmox_lxc_guest.jellyfin` --references--> `var.lxc_password`  [EXTRACTED]
-  iac/100.tf → iac/variables.tf
-- `proxmox_lxc_guest.qbittorrent` --references--> `var.lxc_password`  [EXTRACTED]
-  iac/101.tf → iac/variables.tf
+- `docker/100 Compose project` --references--> `Jellyfin Compose service`  [EXTRACTED]
+  docker/100/docker-compose.yml → docker/100/jellyfin/docker-compose.jellyfin.yml
+- `lazylibrarian` --shares_data_with--> `radarr`  [EXTRACTED]
+  docker/102/lazylibrarian/docker-compose.lazylibrarian.yml → docker/102/radarr/docker-compose.radarr.yml
 
 ## Import Cycles
 - None detected.
 
-## Communities (29 total, 15 thin omitted)
+## Communities (28 total, 15 thin omitted)
 
 ### Community 0 - "Cave server architecture"
 Cohesion: 0.25
@@ -85,7 +84,7 @@ Nodes (7): check_id(), contains_id(), LOCK_FILE, REPO_ROOT, update-images.sh scr
 
 ### Community 2 - "Repository operational architecture"
 Cohesion: 0.12
-Nodes (15): Compose services, LXC 103 — Jellystat and Jellyseerr, LXC definition, Operations, Active Compose services, LXC 104 — Monitoring and service portal, LXC definition, Operations (+7 more)
+Nodes (15): Compose project, LXC 101 — qBittorrent, LXC definition, Operations, Active Compose services, LXC 102 — Arr stack, LXC definition, Operations (+7 more)
 
 ### Community 3 - "radarr"
 Cohesion: 0.52
@@ -119,33 +118,27 @@ Nodes (4): Compose project, LXC 100 — Jellyfin, LXC definition, Operations
 Cohesion: 0.29
 Nodes (7): docker/100 Compose project, Jellyfin Compose service, Jellyfin GPU passthrough, Migration plan VM 200 to multi-LXC architecture, rsync data backup, Terraform-managed LXCs, ZFS RAIDZ expansion
 
-### Community 24 - "Terraform module: iac"
-Cohesion: 0.13
-Nodes (13): Terraform module: iac, provider.proxmox, proxmox_lxc_guest.arr_stack, proxmox_lxc_guest.immich, proxmox_lxc_guest.jellyfin, proxmox_lxc_guest.jellystats, proxmox_lxc_guest.monitoring, proxmox_lxc_guest.qbittorrent (+5 more)
-
-### Community 25 - "LXC 101 — qBittorrent"
+### Community 24 - "LXC 103 — Jellystat and Jellyseerr"
 Cohesion: 0.40
-Nodes (4): Compose project, LXC 101 — qBittorrent, LXC definition, Operations
+Nodes (4): Compose services, LXC 103 — Jellystat and Jellyseerr, LXC definition, Operations
 
-### Community 28 - "LXC 102 — Arr stack"
+### Community 25 - "LXC 104 — Monitoring and service portal"
 Cohesion: 0.40
-Nodes (4): Active Compose services, LXC 102 — Arr stack, LXC definition, Operations
+Nodes (4): Active Compose services, LXC 104 — Monitoring and service portal, LXC definition, Operations
 
 ## Knowledge Gaps
-- **64 isolated node(s):** `var.pm_api_token_id`, `var.pm_api_token_secret`, `backup-critical-data.sh script`, `fix-perms.sh script`, `season_rules` (+59 more)
-  These have ≤1 connection - possible missing edges or undocumented components. (Counts symbols only; 71 node(s) total have ≤1 connection when file, concept and rationale nodes are included.)
+- **62 isolated node(s):** `backup-critical-data.sh script`, `fix-perms.sh script`, `season_rules`, `rule_start`, `rule_end` (+57 more)
+  These have ≤1 connection - possible missing edges or undocumented components. (Counts symbols only; 68 node(s) total have ≤1 connection when file, concept and rationale nodes are included.)
 - **15 thin communities (<3 nodes) omitted from report** — run `graphify query` to explore isolated nodes.
 
 ## Suggested Questions
 _Questions this graph is uniquely positioned to answer:_
 
-- **Why does `Repository operational architecture` connect `Repository operational architecture` to `LXC 105 — Immich`, `LXC 100 — Jellyfin`, `Migration plan VM 200 to multi-LXC architecture`, `LXC 101 — qBittorrent`, `LXC 102 — Arr stack`?**
-  _High betweenness centrality (0.093) - this node is a cross-community bridge._
+- **Why does `Repository operational architecture` connect `Repository operational architecture` to `LXC 105 — Immich`, `LXC 100 — Jellyfin`, `Migration plan VM 200 to multi-LXC architecture`, `LXC 103 — Jellystat and Jellyseerr`, `LXC 104 — Monitoring and service portal`?**
+  _High betweenness centrality (0.133) - this node is a cross-community bridge._
 - **Why does `Migration plan VM 200 to multi-LXC architecture` connect `Migration plan VM 200 to multi-LXC architecture` to `Repository operational architecture`?**
-  _High betweenness centrality (0.026) - this node is a cross-community bridge._
-- **What connects `var.pm_api_token_id`, `var.pm_api_token_secret`, `backup-critical-data.sh script` to the rest of the system?**
-  _64 weakly-connected nodes found - possible documentation gaps or missing edges._
+  _High betweenness centrality (0.037) - this node is a cross-community bridge._
+- **What connects `backup-critical-data.sh script`, `fix-perms.sh script`, `season_rules` to the rest of the system?**
+  _62 weakly-connected nodes found - possible documentation gaps or missing edges._
 - **Should `Repository operational architecture` be split into smaller, more focused modules?**
   _Cohesion score 0.11764705882352941 - nodes in this community are weakly interconnected._
-- **Should `Terraform module: iac` be split into smaller, more focused modules?**
-  _Cohesion score 0.12554112554112554 - nodes in this community are weakly interconnected._

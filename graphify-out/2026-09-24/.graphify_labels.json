@@ -23,9 +23,8 @@
   "21": "LXC 100 — Jellyfin",
   "22": "Migration plan VM 200 to multi-LXC architecture",
   "23": "Backups",
-  "24": "Terraform module: iac",
-  "25": "LXC 101 — qBittorrent",
+  "24": "LXC 103 — Jellystat and Jellyseerr",
+  "25": "LXC 104 — Monitoring and service portal",
   "26": "AGENTS.md",
-  "27": "backup-critical-data.sh",
-  "28": "LXC 102 — Arr stack"
+  "27": "backup-critical-data.sh"
 }
