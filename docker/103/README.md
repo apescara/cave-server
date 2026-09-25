@@ -27,9 +27,9 @@ Mounts:
 
 | Service | Port | Persistent data | Role |
 | --- | ---: | --- | --- |
-| `jellystat` | `3000` | `jellystat/jellystat-backup-data` | Jellyfin statistics |
-| `jellystat-db` | internal `5432` | `jellystat/postgres-data` | PostgreSQL database |
-| `jellyseerr` | `5055` | `jellyseerr/config` | Media requests |
+| `jellystat` | `3000` | `/var/lib/cave-appdata/jellystat/backup-data` | Jellyfin statistics |
+| `jellystat-db` | internal `5432` | `/var/lib/cave-appdata/jellystat/postgres-data` | PostgreSQL database |
+| `jellyseerr` | `5055` | `/var/lib/cave-appdata/seerr/config` | Media requests |
 
 Jellystat depends on a healthy PostgreSQL container. Its checked-in Compose
 file currently contains database credentials and a JWT secret; treat these as

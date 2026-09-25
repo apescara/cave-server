@@ -8,7 +8,7 @@ services:
       - PGID=${PGID}
       - TZ=${TZ}
     volumes:
-      - './config:/config'
+      - '/var/lib/cave-appdata/bazarr/config:/config'
       - /mnt/seagate4t/series:/series
       - /mnt/seagate4t/anime:/anime
       - /mnt/lake1t/movies:/movies

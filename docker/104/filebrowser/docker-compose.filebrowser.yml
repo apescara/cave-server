@@ -10,7 +10,7 @@ services:
       - PGID=${PGID}
       - TZ=${TZ}
     volumes:
-      - ./database:/database
-      - ./config:/config
+      - /var/lib/cave-appdata/filebrowser/database:/database
+      - /var/lib/cave-appdata/filebrowser/config:/config
       - /mnt/seagate4t:/srv/seagate4t
       - /mnt/lake1t:/srv/lake1t

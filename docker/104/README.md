@@ -35,8 +35,9 @@ Mounts:
 
 Homarr and Watchtower mount `/var/run/docker.sock`. This grants Docker API
 control to Watchtower and visibility to Homarr, so review those mounts before
-exposing the LXC beyond the trusted network. File Browser stores its database
-and config in `database/` and `config/`, and exposes the lake and seagate
+exposing the LXC beyond the trusted network. Homarr stores app data at
+`/var/lib/cave-appdata/homarr/appdata`. File Browser stores its database and
+config at `/var/lib/cave-appdata/filebrowser/`, and exposes the lake and seagate
 mounts read/write through `/srv`.
 
 ## Operations

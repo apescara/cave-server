@@ -40,9 +40,11 @@ The project entry point includes `immich/docker-compose.immich.yml`:
 | `redis` | internal | Valkey job/cache service |
 
 Photo uploads are mounted from `${UPLOAD_LOCATION}` to `/data` and database
-data from `${DB_DATA_LOCATION}` to `/var/lib/postgresql/data`. These locations
-and `IMMICH_VERSION`, `DB_PASSWORD`, `DB_USERNAME`, and `DB_DATABASE_NAME` are
-defined in the untracked `docker/105/.env` file.
+data from `${DB_DATA_LOCATION}` to `/var/lib/postgresql/data`. The live
+`DB_DATA_LOCATION` is `/var/lib/cave-appdata/immich/postgres` on the LXC's
+SSD-backed root disk; photo uploads remain on `/mnt/lake1t/library`. These
+locations and `IMMICH_VERSION`, `DB_PASSWORD`, `DB_USERNAME`, and
+`DB_DATABASE_NAME` are defined in the untracked `docker/105/immich/.env` file.
 
 The Compose file is copied from the Immich deployment format; follow the
 [official Immich Docker installation guide](https://docs.immich.app/install/docker-compose)

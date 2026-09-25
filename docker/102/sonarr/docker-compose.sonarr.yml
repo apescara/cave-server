@@ -11,7 +11,7 @@ services:
     ports:
       - 8989:8989
     volumes:
-      - ./config:/config
+      - /var/lib/cave-appdata/sonarr/config:/config
       - /mnt/lake1t/downloads:/downloads
       - /mnt/seagate4t/series:/series
       - /mnt/seagate4t/anime:/anime
@@ -31,4 +31,3 @@ services:
       - CHECK_INTERVAL=10m            # 1d, 6h, 30m, etc..   (Optional) default: 10m   
       - STRIKE_THRESHOLD=3            # Positive number      (Optional) default: 3     
       - AGGRESSIVE_STRIKES=true      # Boolean              (Optional) default: falses
-

@@ -13,9 +13,9 @@ services:
       - 8096:8096/tcp
       - 7359:7359/udp
     volumes:
-      - './cache:/cache'
-      - './config:/config'
-      - './logs:/logs'
+      - '/var/lib/cave-appdata/jellyfin/cache:/cache'
+      - '/var/lib/cave-appdata/jellyfin/config:/config'
+      - '/var/lib/cave-appdata/jellyfin/logs:/logs'
       - /mnt/seagate4t:/seagate4t
       - /mnt/lake1t:/lake1t
     network_mode: 'host'

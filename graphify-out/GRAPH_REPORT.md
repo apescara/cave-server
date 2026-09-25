@@ -1,7 +1,7 @@
 # Graph Report - cave-server  (2026-09-24)
 
 ## Corpus Check
-- 27 files · ~10,715 words
+- 27 files · ~10,861 words
 - Verdict: corpus is large enough that graph structure adds value.
 - Unclassified: 7 file(s) not represented in the graph (top: (none) 7)
 
@@ -11,7 +11,7 @@
 - Token cost: 0 input · 0 output
 
 ## Graph Freshness
-- Built from commit: `7817e1bf`
+- Built from commit: `20a089e1`
 - Run `git rev-parse HEAD` and compare to check if the graph is stale.
 - Run `graphify update .` after code changes (no API cost).
 

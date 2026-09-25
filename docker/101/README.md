@@ -31,7 +31,8 @@ started by the entry point.
 | `transmission` | `linuxserver/transmission:latest` | `9091`, `51413/tcp+udp` | Optional, currently disabled |
 
 qBittorrent uses `network_mode: service:protonvpn` and depends on the VPN
-health check. Its configuration is stored in `qbittorrent/config/`; the
+health check. Its configuration is stored on the SSD at
+`/var/lib/cave-appdata/qbittorrent/config`; the
 download directory is `${PATH_MEDIA}` on the LXC and `/downloads` in the
 container. Gluetun stores VPN state in `protonvpn/vpn/` and requires
 `/dev/net/tun`, `NET_ADMIN`, and the VPN credentials in `.env`.

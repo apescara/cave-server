@@ -8,5 +8,5 @@ services:
     ports:
       - 7575:7575
     volumes:
-      - ./appdata:/appdata
+      - /var/lib/cave-appdata/homarr/appdata:/appdata
       - /var/run/docker.sock:/var/run/docker.sock

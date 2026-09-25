@@ -7,7 +7,7 @@ services:
       - "5056:80"
     volumes:
       # App data — holds the database and auto-generated secret key (required)
-      - ./data:/rails/storage
+      - /var/lib/cave-appdata/shelfarr/data:/rails/storage
       # Your library + download folders — edit the left side
       - /mnt/lake1t/audiobooks:/audiobooks
       - /mnt/lake1t/ebooks:/ebooks

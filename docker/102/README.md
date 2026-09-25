@@ -44,7 +44,11 @@ The entry point includes the following files:
 The Compose entry point is `docker-compose.yml`. `bookshelf` and
 `lazylibrarian` have Compose files but are commented out and are not active.
 
-Configuration and application data are stored in the service subdirectories.
+Active service configuration and databases are stored under
+`/var/lib/cave-appdata` on the LXC's SSD-backed root disk. The old service
+subdirectories on `/mnt/lake1t/cave-server` are retained temporarily for
+rollback; they are no longer the active data. Proxmox guest backups include
+`/var/lib/cave-appdata`.
 Shared libraries use paths below `/mnt/lake1t` and `/mnt/seagate4t`; the exact
 container paths are visible in each service Compose file. Radarr and Sonarr
 also require `RADARR_API_KEY` and `SONARR_API_KEY` for their Swaparr helpers.

@@ -32,7 +32,8 @@ The project entry point is `docker-compose.yml`; it includes
 | --- | --- | --- | --- |
 | `jellyfin` | `jellyfin/jellyfin:latest` | host network; normally `8096/tcp`, `7359/udp` | Media server |
 
-The container mounts local `cache/`, `config/`, and `logs/` directories. It
+The container mounts SSD-backed `cache/`, `config/`, and `logs/` directories
+under `/var/lib/cave-appdata/jellyfin/`. It
 also mounts both LXC media paths as `/lake1t` and `/seagate4t` and receives
 `/dev/dri/renderD128` for hardware transcoding. The `JELLYFIN_PublishedServerUrl`
 value is currently `https://jellyfin.dacave.org/`.

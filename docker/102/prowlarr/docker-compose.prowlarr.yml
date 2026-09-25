@@ -11,4 +11,4 @@ services:
     ports:
       - 9696:9696
     volumes:
-      - ./config:/config
+      - /var/lib/cave-appdata/prowlarr/config:/config

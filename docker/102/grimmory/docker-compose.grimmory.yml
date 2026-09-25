@@ -22,7 +22,7 @@ services:
     ports:
       - "6060:6060"
     volumes:
-      - ./data:/app/data
+      - /var/lib/cave-appdata/grimmory/data:/app/data
       - /mnt/lake1t/ebooks:/books
       - /mnt/lake1t/audiobooks:/audiobooks
       - /mnt/lake1t/bookdrop:/bookdrop
@@ -45,7 +45,7 @@ services:
       - MYSQL_USER=${DB_USER}
       - MYSQL_PASSWORD=${DB_PASSWORD}
     volumes:
-      - ./mariadb/config:/config
+      - /var/lib/cave-appdata/grimmory/mariadb:/config
     restart: unless-stopped
     healthcheck:
       test: ["CMD", "mariadb-admin", "ping", "-h", "localhost"]

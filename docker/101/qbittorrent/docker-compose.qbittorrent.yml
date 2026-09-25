@@ -12,14 +12,14 @@ services:
       - WEBUI_PORT=${QBITTORRENT_WEBUI_PORT}
       - TORRENTING_PORT=6881
     volumes:
-      - ./config:/config
+      - /var/lib/cave-appdata/qbittorrent/config:/config
       - ${PATH_MEDIA}:/downloads
     network_mode: "service:protonvpn"
     restart: unless-stopped
     healthcheck:
       test:
         - CMD-SHELL
-        - curl --fail http://localhost:8080 || exit 1
+        - curl --fail http://localhost:${QBITTORRENT_WEBUI_PORT} || exit 1
       interval: 30s
       timeout: 3s
       retries: 3

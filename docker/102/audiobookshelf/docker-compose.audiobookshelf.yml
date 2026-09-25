@@ -8,8 +8,8 @@ services:
     volumes:
       # These volumes are needed to keep your library persistent
       # and allow media to be accessed by the ABS server.
-      - ./config:/config
-      - ./metadata:/metadata
+      - /var/lib/cave-appdata/audiobookshelf/config:/config
+      - /var/lib/cave-appdata/audiobookshelf/metadata:/metadata
       # The path to the left of the colon is the path on your computer,
       # and the path to the right of the colon is where the data is
       # available to ABS in Docker. You can change these lines freely

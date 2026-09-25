@@ -13,7 +13,7 @@ services:
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: mypassword
     volumes:
-      - ./postgres-data:/var/lib/postgresql
+      - /var/lib/cave-appdata/jellystat/postgres-data:/var/lib/postgresql
     healthcheck:
       test:
         - CMD-SHELL
@@ -39,7 +39,7 @@ services:
       JWT_SECRET: "MOoFkZzfCPUfTyQjFAxCEhmfAsOKOlstvbavRfLZFcXEAEXuYOQBFExeJlSJmLwF"
       TZ: mytimezone # timezone (ex: Europe/Paris)
     volumes:
-      - ./jellystat-backup-data:/app/backend/backup-data
+      - /var/lib/cave-appdata/jellystat/backup-data:/app/backend/backup-data
     ports:
       - "3000:3000"
     depends_on:

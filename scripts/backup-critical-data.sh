@@ -1,8 +1,9 @@
 #!/usr/bin/env bash
 set -Eeuo pipefail
 
-# Run as root on the Proxmox host. Proxmox vzdump excludes LXC bind mounts;
-# this job saves the application data on lake1t to the separate Seagate pool.
+# Run as root on the Proxmox host. Proxmox vzdump covers SSD-backed LXC app
+# data; this job saves the repository, environment files, and logical database
+# exports to the separate Seagate pool.
 umask 077
 exec 9>/run/lock/cave-critical-backup.lock
 flock -n 9 || { echo 'A critical-data backup is already running.' >&2; exit 1; }
@@ -56,7 +57,23 @@ rsync "${rsync_options[@]}" \
   --exclude='/.git/' --exclude='/graphify-out/' \
   --exclude='/docker/100/jellyfin/cache/' \
   --exclude='/docker/100/jellyfin/logs/' \
-  --exclude='/docker/100/jellyfin/config/metadata/' \
+  --exclude='/docker/100/jellyfin/config/' \
+  --exclude='/docker/101/qbittorrent/config/' \
+  --exclude='/docker/102/audiobookshelf/config/' \
+  --exclude='/docker/102/audiobookshelf/metadata/' \
+  --exclude='/docker/102/bazarr/config/' \
+  --exclude='/docker/102/grimmory/data/' \
+  --exclude='/docker/102/grimmory/mariadb/config/' \
+  --exclude='/docker/102/prowlarr/config/' \
+  --exclude='/docker/102/radarr/config/' \
+  --exclude='/docker/102/shelfarr/data/' \
+  --exclude='/docker/102/sonarr/config/' \
+  --exclude='/docker/103/jellyseerr/config/' \
+  --exclude='/docker/103/jellystat/postgres-data/' \
+  --exclude='/docker/103/jellystat/jellystat-backup-data/' \
+  --exclude='/docker/104/homarr/appdata/' \
+  --exclude='/docker/104/filebrowser/config/' \
+  --exclude='/docker/104/filebrowser/database/' \
   --exclude='/docker/105/immich/postgres/' \
   "${snapshot_path}/cave-server/" "${destination}/cave-server/"
 
