@@ -1,17 +1,17 @@
 # Graph Report - cave-server  (2026-09-24)
 
 ## Corpus Check
-- 27 files · ~10,715 words
+- 30 files · ~12,420 words
 - Verdict: corpus is large enough that graph structure adds value.
 - Unclassified: 7 file(s) not represented in the graph (top: (none) 7)
 
 ## Summary
-- 137 nodes · 135 edges · 29 communities (14 shown, 15 thin omitted)
+- 143 nodes · 143 edges · 29 communities (15 shown, 14 thin omitted)
 - Extraction: 98% EXTRACTED · 2% INFERRED · 0% AMBIGUOUS · INFERRED: 3 edges (avg confidence: 0.88)
 - Token cost: 0 input · 0 output
 
 ## Graph Freshness
-- Built from commit: `7817e1bf`
+- Built from commit: `8be787ff`
 - Run `git rev-parse HEAD` and compare to check if the graph is stale.
 - Run `graphify update .` after code changes (no API cost).
 
@@ -39,7 +39,7 @@
 - LXC 105 — Immich
 - LXC 100 — Jellyfin
 - Migration plan VM 200 to multi-LXC architecture
-- Backups
+- BACKUPS.md
 - Terraform module: iac
 - LXC 101 — qBittorrent
 - AGENTS.md
@@ -47,7 +47,7 @@
 - LXC 102 — Arr stack
 
 ## God Nodes (most connected - your core abstractions)
-1. `Repository operational architecture` - 11 edges
+1. `Repository operational architecture` - 12 edges
 2. `Terraform module: iac` - 9 edges
 3. `var.lxc_password` - 7 edges
 4. `move-anime-seasons.sh script` - 5 edges
@@ -73,7 +73,7 @@
 ## Import Cycles
 - None detected.
 
-## Communities (29 total, 15 thin omitted)
+## Communities (29 total, 14 thin omitted)
 
 ### Community 0 - "Cave server architecture"
 Cohesion: 0.25
@@ -84,8 +84,8 @@ Cohesion: 0.36
 Nodes (7): check_id(), contains_id(), LOCK_FILE, REPO_ROOT, update-images.sh script, usage(), VALID_IDS
 
 ### Community 2 - "Repository operational architecture"
-Cohesion: 0.12
-Nodes (15): Compose services, LXC 103 — Jellystat and Jellyseerr, LXC definition, Operations, Active Compose services, LXC 104 — Monitoring and service portal, LXC definition, Operations (+7 more)
+Cohesion: 0.11
+Nodes (17): Compose services, LXC 103 — Jellystat and Jellyseerr, LXC definition, Operations, Active Compose services, LXC 104 — Monitoring and service portal, LXC definition, Operations (+9 more)
 
 ### Community 3 - "radarr"
 Cohesion: 0.52
@@ -119,6 +119,10 @@ Nodes (4): Compose project, LXC 100 — Jellyfin, LXC definition, Operations
 Cohesion: 0.29
 Nodes (7): docker/100 Compose project, Jellyfin Compose service, Jellyfin GPU passthrough, Migration plan VM 200 to multi-LXC architecture, rsync data backup, Terraform-managed LXCs, ZFS RAIDZ expansion
 
+### Community 23 - "BACKUPS.md"
+Cohesion: 0.33
+Nodes (4): Backups, Check a backup, Rollback one service, SSD app data migration
+
 ### Community 24 - "Terraform module: iac"
 Cohesion: 0.13
 Nodes (13): Terraform module: iac, provider.proxmox, proxmox_lxc_guest.arr_stack, proxmox_lxc_guest.immich, proxmox_lxc_guest.jellyfin, proxmox_lxc_guest.jellystats, proxmox_lxc_guest.monitoring, proxmox_lxc_guest.qbittorrent (+5 more)
@@ -132,20 +136,20 @@ Cohesion: 0.40
 Nodes (4): Active Compose services, LXC 102 — Arr stack, LXC definition, Operations
 
 ## Knowledge Gaps
-- **64 isolated node(s):** `var.pm_api_token_id`, `var.pm_api_token_secret`, `backup-critical-data.sh script`, `fix-perms.sh script`, `season_rules` (+59 more)
-  These have ≤1 connection - possible missing edges or undocumented components. (Counts symbols only; 71 node(s) total have ≤1 connection when file, concept and rationale nodes are included.)
-- **15 thin communities (<3 nodes) omitted from report** — run `graphify query` to explore isolated nodes.
+- **66 isolated node(s):** `var.pm_api_token_id`, `var.pm_api_token_secret`, `backup-critical-data.sh script`, `fix-perms.sh script`, `season_rules` (+61 more)
+  These have ≤1 connection - possible missing edges or undocumented components. (Counts symbols only; 72 node(s) total have ≤1 connection when file, concept and rationale nodes are included.)
+- **14 thin communities (<3 nodes) omitted from report** — run `graphify query` to explore isolated nodes.
 
 ## Suggested Questions
 _Questions this graph is uniquely positioned to answer:_
 
 - **Why does `Repository operational architecture` connect `Repository operational architecture` to `LXC 105 — Immich`, `LXC 100 — Jellyfin`, `Migration plan VM 200 to multi-LXC architecture`, `LXC 101 — qBittorrent`, `LXC 102 — Arr stack`?**
-  _High betweenness centrality (0.093) - this node is a cross-community bridge._
+  _High betweenness centrality (0.128) - this node is a cross-community bridge._
 - **Why does `Migration plan VM 200 to multi-LXC architecture` connect `Migration plan VM 200 to multi-LXC architecture` to `Repository operational architecture`?**
-  _High betweenness centrality (0.026) - this node is a cross-community bridge._
+  _High betweenness centrality (0.031) - this node is a cross-community bridge._
 - **What connects `var.pm_api_token_id`, `var.pm_api_token_secret`, `backup-critical-data.sh script` to the rest of the system?**
-  _64 weakly-connected nodes found - possible documentation gaps or missing edges._
+  _66 weakly-connected nodes found - possible documentation gaps or missing edges._
 - **Should `Repository operational architecture` be split into smaller, more focused modules?**
-  _Cohesion score 0.11764705882352941 - nodes in this community are weakly interconnected._
+  _Cohesion score 0.10526315789473684 - nodes in this community are weakly interconnected._
 - **Should `Terraform module: iac` be split into smaller, more focused modules?**
   _Cohesion score 0.12554112554112554 - nodes in this community are weakly interconnected._

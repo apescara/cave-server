@@ -628,7 +628,43 @@
       "node_kind": "heading",
       "norm_label": "operations",
       "source_file": "docker/104/README.md",
-      "source_location": "L43"
+      "source_location": "L47"
+    },
+    {
+      "id": "home_assistant_panel",
+      "label": "HOME_ASSISTANT_PANEL.md",
+      "_origin": "ast",
+      "community": 2,
+      "community_name": "Repository operational architecture",
+      "file_type": "document",
+      "node_kind": "page",
+      "norm_label": "home_assistant_panel.md",
+      "source_file": "HOME_ASSISTANT_PANEL.md",
+      "source_location": "L1"
+    },
+    {
+      "id": "home_assistant_panel_home_assistant_server_panel",
+      "label": "Home Assistant server panel",
+      "_origin": "ast",
+      "community": 2,
+      "community_name": "Repository operational architecture",
+      "file_type": "document",
+      "node_kind": "heading",
+      "norm_label": "home assistant server panel",
+      "source_file": "HOME_ASSISTANT_PANEL.md",
+      "source_location": "L1"
+    },
+    {
+      "id": "home_assistant_panel_restore_or_update_the_dashboard",
+      "label": "Restore or update the dashboard",
+      "_origin": "ast",
+      "community": 2,
+      "community_name": "Repository operational architecture",
+      "file_type": "document",
+      "node_kind": "heading",
+      "norm_label": "restore or update the dashboard",
+      "source_file": "HOME_ASSISTANT_PANEL.md",
+      "source_location": "L28"
     },
     {
       "id": "docker_105_readme",
@@ -767,7 +803,7 @@
       "label": "BACKUPS.md",
       "_origin": "ast",
       "community": 23,
-      "community_name": "Backups",
+      "community_name": "BACKUPS.md",
       "file_type": "document",
       "node_kind": "page",
       "norm_label": "backups.md",
@@ -779,7 +815,7 @@
       "label": "Backups",
       "_origin": "ast",
       "community": 23,
-      "community_name": "Backups",
+      "community_name": "BACKUPS.md",
       "file_type": "document",
       "node_kind": "heading",
       "norm_label": "backups",
@@ -791,12 +827,48 @@
       "label": "Check a backup",
       "_origin": "ast",
       "community": 23,
-      "community_name": "Backups",
+      "community_name": "BACKUPS.md",
       "file_type": "document",
       "node_kind": "heading",
       "norm_label": "check a backup",
       "source_file": "BACKUPS.md",
       "source_location": "L31"
+    },
+    {
+      "id": "ssd_appdata",
+      "label": "SSD_APPDATA.md",
+      "_origin": "ast",
+      "community": 23,
+      "community_name": "BACKUPS.md",
+      "file_type": "document",
+      "node_kind": "page",
+      "norm_label": "ssd_appdata.md",
+      "source_file": "SSD_APPDATA.md",
+      "source_location": "L1"
+    },
+    {
+      "id": "ssd_appdata_rollback_one_service",
+      "label": "Rollback one service",
+      "_origin": "ast",
+      "community": 23,
+      "community_name": "BACKUPS.md",
+      "file_type": "document",
+      "node_kind": "heading",
+      "norm_label": "rollback one service",
+      "source_file": "SSD_APPDATA.md",
+      "source_location": "L24"
+    },
+    {
+      "id": "ssd_appdata_ssd_app_data_migration",
+      "label": "SSD app data migration",
+      "_origin": "ast",
+      "community": 23,
+      "community_name": "BACKUPS.md",
+      "file_type": "document",
+      "node_kind": "heading",
+      "norm_label": "ssd app data migration",
+      "source_file": "SSD_APPDATA.md",
+      "source_location": "L1"
     },
     {
       "id": "docker_101_readme",
@@ -2302,7 +2374,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "docker/104/README.md",
-      "source_location": "L43",
+      "source_location": "L47",
       "weight": 1.0
     },
     {
@@ -2369,6 +2441,28 @@
       "confidence_score": 1.0,
       "source_file": "docker/105/README.md",
       "source_location": "L26",
+      "weight": 1.0
+    },
+    {
+      "source": "home_assistant_panel",
+      "target": "home_assistant_panel_home_assistant_server_panel",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "HOME_ASSISTANT_PANEL.md",
+      "source_location": "L1",
+      "weight": 1.0
+    },
+    {
+      "source": "home_assistant_panel_home_assistant_server_panel",
+      "target": "home_assistant_panel_restore_or_update_the_dashboard",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "HOME_ASSISTANT_PANEL.md",
+      "source_location": "L28",
       "weight": 1.0
     },
     {
@@ -2556,6 +2650,28 @@
       "confidence_score": 1.0,
       "source_file": "scripts/update-images.sh",
       "source_location": "L1",
+      "weight": 1.0
+    },
+    {
+      "source": "ssd_appdata",
+      "target": "ssd_appdata_ssd_app_data_migration",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "SSD_APPDATA.md",
+      "source_location": "L1",
+      "weight": 1.0
+    },
+    {
+      "source": "ssd_appdata_ssd_app_data_migration",
+      "target": "ssd_appdata_rollback_one_service",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "SSD_APPDATA.md",
+      "source_location": "L24",
       "weight": 1.0
     },
     {
@@ -2823,6 +2939,28 @@
       "weight": 1.0
     },
     {
+      "source": "docker_104_readme",
+      "target": "home_assistant_panel",
+      "relation": "references",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "docker/104/README.md",
+      "source_location": "L45",
+      "weight": 1.0
+    },
+    {
+      "source": "home_assistant_panel",
+      "target": "scripts_update_images",
+      "relation": "references",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "HOME_ASSISTANT_PANEL.md",
+      "source_location": "L26",
+      "weight": 1.0
+    },
+    {
       "source": "readme_repository_architecture",
       "target": "docker_100_readme",
       "relation": "references",
@@ -2886,6 +3024,28 @@
       "confidence_score": 1.0,
       "source_file": "README.md",
       "source_location": "L27",
+      "weight": 1.0
+    },
+    {
+      "source": "readme_repository_architecture",
+      "target": "home_assistant_panel",
+      "relation": "references",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "README.md",
+      "source_location": "L31",
+      "weight": 1.0
+    },
+    {
+      "source": "ssd_appdata",
+      "target": "backups",
+      "relation": "references",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "SSD_APPDATA.md",
+      "source_location": "L21",
       "weight": 1.0
     },
     {
@@ -3473,5 +3633,5 @@
     }
   ],
   "hyperedges": [],
-  "built_at_commit": "20a089e15c5385750c0863958f611a04f65df5e2"
+  "built_at_commit": "8be787ffdf48ff3411ffb56248430ff862bd3548"
 }

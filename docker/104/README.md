@@ -40,6 +40,10 @@ exposing the LXC beyond the trusted network. Homarr stores app data at
 config at `/var/lib/cave-appdata/filebrowser/`, and exposes the lake and seagate
 mounts read/write through `/srv`.
 
+Homarr's Docker socket only shows containers inside LXC 104. The server-wide
+guest status and resource panel lives in Home Assistant VM 201; see
+[`HOME_ASSISTANT_PANEL.md`](../../HOME_ASSISTANT_PANEL.md).
+
 ## Operations
 
 Run from this directory inside LXC 104:

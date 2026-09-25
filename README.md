@@ -28,6 +28,9 @@ The host is a Proxmox node named `cave`.
 | 106 | `grafana` | NA | Graphana | mode=generated var_ctid="106" var_pw="***" bash -c "$(curl -fsSL https://raw.githubusercontent.com/community-scripts/ProxmoxVE/main/ct/grafana.sh)" |
 | 107 | `influxdb` | NA | InfluxDB | mode=generated var_ctid="107" var_pw="***" bash -c "$(curl -fsSL https://raw.githubusercontent.com/community-scripts/ProxmoxVE/main/ct/influxdb.sh)" |
 
+Home Assistant VM 201 hosts the [Cave server control panel](HOME_ASSISTANT_PANEL.md)
+for Proxmox guest status, resource usage, storage, and backup health.
+
 
 Seanime is separate from the Terraform-managed LXCs and is defined in
 `media/`. It expects `/mnt/series/anime` inside its Docker environment.

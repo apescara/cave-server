@@ -22,7 +22,7 @@
   "20": "LXC 105 — Immich",
   "21": "LXC 100 — Jellyfin",
   "22": "Migration plan VM 200 to multi-LXC architecture",
-  "23": "Backups",
+  "23": "BACKUPS.md",
   "24": "Terraform module: iac",
   "25": "LXC 101 — qBittorrent",
   "26": "AGENTS.md",

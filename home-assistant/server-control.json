@@ -1,0 +1,548 @@
+{
+  "title": "Cave server",
+  "views": [
+    {
+      "title": "Overview",
+      "path": "overview",
+      "icon": "mdi:view-dashboard",
+      "type": "sections",
+      "max_columns": 3,
+      "sections": [
+        {
+          "type": "grid",
+          "cards": [
+            {
+              "type": "heading",
+              "heading": "Proxmox host",
+              "icon": "mdi:server-network"
+            },
+            {
+              "type": "entities",
+              "title": "cave",
+              "show_header_toggle": false,
+              "entities": [
+                {
+                  "entity": "binary_sensor.cave_status",
+                  "name": "Host online"
+                },
+                {
+                  "entity": "sensor.cave_cpu_usage",
+                  "name": "CPU"
+                },
+                {
+                  "entity": "sensor.cave_memory_usage_percentage",
+                  "name": "Memory"
+                },
+                {
+                  "entity": "sensor.cave_disk_usage",
+                  "name": "Root disk"
+                },
+                {
+                  "entity": "binary_sensor.cave_backup_status",
+              "name": "Backup health"
+                },
+                {
+                  "entity": "sensor.cave_last_backup",
+                  "name": "Last guest backup"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "grid",
+          "cards": [
+            {
+              "type": "heading",
+              "heading": "Guests",
+              "icon": "mdi:server-outline"
+            },
+            {
+              "type": "entities",
+              "title": "LXC and VM status",
+              "show_header_toggle": false,
+              "state_color": true,
+              "entities": [
+                {
+                  "entity": "binary_sensor.jellyfin_status",
+                  "name": "100 \u00b7 Jellyfin"
+                },
+                {
+                  "entity": "binary_sensor.qbittorrent_status",
+                  "name": "101 \u00b7 qBittorrent"
+                },
+                {
+                  "entity": "binary_sensor.arr_stack_status",
+                  "name": "102 \u00b7 Arr stack"
+                },
+                {
+                  "entity": "binary_sensor.jellystats_status",
+                  "name": "103 \u00b7 Jellystat / Seerr"
+                },
+                {
+                  "entity": "binary_sensor.monitoring_status",
+                  "name": "104 \u00b7 Monitoring / Homarr"
+                },
+                {
+                  "entity": "binary_sensor.immich_status",
+                  "name": "105 \u00b7 Immich"
+                },
+                {
+                  "entity": "binary_sensor.grafana_status",
+                  "name": "106 \u00b7 Grafana"
+                },
+                {
+                  "entity": "binary_sensor.influxdb_status",
+                  "name": "107 \u00b7 InfluxDB"
+                },
+                {
+                  "entity": "binary_sensor.hoa_status",
+                  "name": "201 \u00b7 Home Assistant"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "grid",
+          "cards": [
+            {
+              "type": "heading",
+              "heading": "Storage",
+              "icon": "mdi:harddisk"
+            },
+            {
+              "type": "gauge",
+              "name": "lake1t used",
+              "entity": "sensor.storage_lake1t_storage_usage_percentage",
+              "min": 0,
+              "max": 100,
+              "severity": {
+                "green": 0,
+                "yellow": 75,
+                "red": 90
+              }
+            },
+            {
+              "type": "gauge",
+              "name": "SSD local-lvm used",
+              "entity": "sensor.storage_local_lvm_storage_usage_percentage",
+              "min": 0,
+              "max": 100,
+              "severity": {
+                "green": 0,
+                "yellow": 75,
+                "red": 90
+              }
+            },
+            {
+              "type": "gauge",
+              "name": "Backup pool used",
+              "entity": "sensor.storage_cave_backups_storage_usage_percentage",
+              "min": 0,
+              "max": 100,
+              "severity": {
+                "green": 0,
+                "yellow": 75,
+                "red": 90
+              }
+            },
+            {
+              "type": "entities",
+              "title": "Pool availability",
+              "show_header_toggle": false,
+              "entities": [
+                {
+                  "entity": "binary_sensor.storage_lake1t_storage_active",
+                  "name": "lake1t active"
+                },
+                {
+                  "entity": "binary_sensor.storage_local_lvm_storage_active",
+                  "name": "local-lvm active"
+                },
+                {
+                  "entity": "binary_sensor.storage_cave_backups_storage_active",
+                  "name": "Backup pool active"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Guest resources",
+      "path": "guests",
+      "icon": "mdi:chart-box",
+      "type": "sections",
+      "max_columns": 3,
+      "sections": [
+        {
+          "type": "grid",
+          "cards": [
+            {
+              "type": "heading",
+              "heading": "100 \u00b7 Jellyfin",
+              "icon": "mdi:server"
+            },
+            {
+              "type": "entities",
+              "show_header_toggle": false,
+              "entities": [
+                {
+                  "entity": "binary_sensor.jellyfin_status",
+                  "name": "Running"
+                },
+                {
+                  "entity": "sensor.jellyfin_cpu_usage",
+                  "name": "CPU"
+                },
+                {
+                  "entity": "sensor.jellyfin_memory_usage_percentage",
+                  "name": "Memory"
+                },
+                {
+                  "entity": "sensor.jellyfin_disk_usage",
+                  "name": "Root disk"
+                },
+                {
+                  "entity": "sensor.jellyfin_uptime",
+                  "name": "Uptime"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "grid",
+          "cards": [
+            {
+              "type": "heading",
+              "heading": "101 \u00b7 qBittorrent",
+              "icon": "mdi:server"
+            },
+            {
+              "type": "entities",
+              "show_header_toggle": false,
+              "entities": [
+                {
+                  "entity": "binary_sensor.qbittorrent_status",
+                  "name": "Running"
+                },
+                {
+                  "entity": "sensor.qbittorrent_cpu_usage",
+                  "name": "CPU"
+                },
+                {
+                  "entity": "sensor.qbittorrent_memory_usage_percentage",
+                  "name": "Memory"
+                },
+                {
+                  "entity": "sensor.qbittorrent_disk_usage",
+                  "name": "Root disk"
+                },
+                {
+                  "entity": "sensor.qbittorrent_uptime",
+                  "name": "Uptime"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "grid",
+          "cards": [
+            {
+              "type": "heading",
+              "heading": "102 \u00b7 Arr stack",
+              "icon": "mdi:server"
+            },
+            {
+              "type": "entities",
+              "show_header_toggle": false,
+              "entities": [
+                {
+                  "entity": "binary_sensor.arr_stack_status",
+                  "name": "Running"
+                },
+                {
+                  "entity": "sensor.arr_stack_cpu_usage",
+                  "name": "CPU"
+                },
+                {
+                  "entity": "sensor.arr_stack_memory_usage_percentage",
+                  "name": "Memory"
+                },
+                {
+                  "entity": "sensor.arr_stack_disk_usage",
+                  "name": "Root disk"
+                },
+                {
+                  "entity": "sensor.arr_stack_uptime",
+                  "name": "Uptime"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "grid",
+          "cards": [
+            {
+              "type": "heading",
+              "heading": "103 \u00b7 Jellystat / Seerr",
+              "icon": "mdi:server"
+            },
+            {
+              "type": "entities",
+              "show_header_toggle": false,
+              "entities": [
+                {
+                  "entity": "binary_sensor.jellystats_status",
+                  "name": "Running"
+                },
+                {
+                  "entity": "sensor.jellystats_cpu_usage",
+                  "name": "CPU"
+                },
+                {
+                  "entity": "sensor.jellystats_memory_usage_percentage",
+                  "name": "Memory"
+                },
+                {
+                  "entity": "sensor.jellystats_disk_usage",
+                  "name": "Root disk"
+                },
+                {
+                  "entity": "sensor.jellystats_uptime",
+                  "name": "Uptime"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "grid",
+          "cards": [
+            {
+              "type": "heading",
+              "heading": "104 \u00b7 Monitoring / Homarr",
+              "icon": "mdi:server"
+            },
+            {
+              "type": "entities",
+              "show_header_toggle": false,
+              "entities": [
+                {
+                  "entity": "binary_sensor.monitoring_status",
+                  "name": "Running"
+                },
+                {
+                  "entity": "sensor.monitoring_cpu_usage",
+                  "name": "CPU"
+                },
+                {
+                  "entity": "sensor.monitoring_memory_usage_percentage",
+                  "name": "Memory"
+                },
+                {
+                  "entity": "sensor.monitoring_disk_usage",
+                  "name": "Root disk"
+                },
+                {
+                  "entity": "sensor.monitoring_uptime",
+                  "name": "Uptime"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "grid",
+          "cards": [
+            {
+              "type": "heading",
+              "heading": "105 \u00b7 Immich",
+              "icon": "mdi:server"
+            },
+            {
+              "type": "entities",
+              "show_header_toggle": false,
+              "entities": [
+                {
+                  "entity": "binary_sensor.immich_status",
+                  "name": "Running"
+                },
+                {
+                  "entity": "sensor.immich_cpu_usage",
+                  "name": "CPU"
+                },
+                {
+                  "entity": "sensor.immich_memory_usage_percentage",
+                  "name": "Memory"
+                },
+                {
+                  "entity": "sensor.immich_disk_usage",
+                  "name": "Root disk"
+                },
+                {
+                  "entity": "sensor.immich_uptime",
+                  "name": "Uptime"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "grid",
+          "cards": [
+            {
+              "type": "heading",
+              "heading": "106 \u00b7 Grafana",
+              "icon": "mdi:server"
+            },
+            {
+              "type": "entities",
+              "show_header_toggle": false,
+              "entities": [
+                {
+                  "entity": "binary_sensor.grafana_status",
+                  "name": "Running"
+                },
+                {
+                  "entity": "sensor.grafana_cpu_usage",
+                  "name": "CPU"
+                },
+                {
+                  "entity": "sensor.grafana_memory_usage_percentage",
+                  "name": "Memory"
+                },
+                {
+                  "entity": "sensor.grafana_disk_usage",
+                  "name": "Root disk"
+                },
+                {
+                  "entity": "sensor.grafana_uptime",
+                  "name": "Uptime"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "grid",
+          "cards": [
+            {
+              "type": "heading",
+              "heading": "107 \u00b7 InfluxDB",
+              "icon": "mdi:server"
+            },
+            {
+              "type": "entities",
+              "show_header_toggle": false,
+              "entities": [
+                {
+                  "entity": "binary_sensor.influxdb_status",
+                  "name": "Running"
+                },
+                {
+                  "entity": "sensor.influxdb_cpu_usage",
+                  "name": "CPU"
+                },
+                {
+                  "entity": "sensor.influxdb_memory_usage_percentage",
+                  "name": "Memory"
+                },
+                {
+                  "entity": "sensor.influxdb_disk_usage",
+                  "name": "Root disk"
+                },
+                {
+                  "entity": "sensor.influxdb_uptime",
+                  "name": "Uptime"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "grid",
+          "cards": [
+            {
+              "type": "heading",
+              "heading": "201 \u00b7 Home Assistant",
+              "icon": "mdi:server"
+            },
+            {
+              "type": "entities",
+              "show_header_toggle": false,
+              "entities": [
+                {
+                  "entity": "binary_sensor.hoa_status",
+                  "name": "Running"
+                },
+                {
+                  "entity": "sensor.hoa_cpu_usage",
+                  "name": "CPU"
+                },
+                {
+                  "entity": "sensor.hoa_memory_usage_percentage",
+                  "name": "Memory"
+                },
+                {
+                  "entity": "sensor.hoa_disk_usage",
+                  "name": "Root disk"
+                },
+                {
+                  "entity": "sensor.hoa_uptime",
+                  "name": "Uptime"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Links",
+      "path": "links",
+      "icon": "mdi:open-in-new",
+      "type": "sections",
+      "max_columns": 2,
+      "sections": [
+        {
+          "type": "grid",
+          "cards": [
+            {
+              "type": "heading",
+              "heading": "Server tools",
+              "icon": "mdi:tools"
+            },
+            {
+              "type": "button",
+              "name": "Proxmox",
+              "icon": "mdi:server-network",
+              "tap_action": {
+                "action": "url",
+                "url_path": "https://192.168.100.17:8006"
+              }
+            },
+            {
+              "type": "button",
+              "name": "Homarr launcher",
+              "icon": "mdi:view-dashboard",
+              "tap_action": {
+                "action": "url",
+                "url_path": "http://192.168.100.94:7575"
+              }
+            },
+            {
+              "type": "markdown",
+              "content": "These links use local network addresses. Proxmox metrics above are read only; service updates remain manual."
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
