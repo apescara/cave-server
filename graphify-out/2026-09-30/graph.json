@@ -667,42 +667,6 @@
       "source_location": "L28"
     },
     {
-      "id": "nas_readme",
-      "label": "nas/README.md",
-      "_origin": "ast",
-      "community": 2,
-      "community_name": "Repository operational architecture",
-      "file_type": "document",
-      "node_kind": "page",
-      "norm_label": "nas/readme.md",
-      "source_file": "nas/README.md",
-      "source_location": "L1"
-    },
-    {
-      "id": "nas_readme_maintenance",
-      "label": "Maintenance",
-      "_origin": "ast",
-      "community": 2,
-      "community_name": "Repository operational architecture",
-      "file_type": "document",
-      "node_kind": "heading",
-      "norm_label": "maintenance",
-      "source_file": "nas/README.md",
-      "source_location": "L47"
-    },
-    {
-      "id": "nas_readme_private_network_share",
-      "label": "Private network share",
-      "_origin": "ast",
-      "community": 2,
-      "community_name": "Repository operational architecture",
-      "file_type": "document",
-      "node_kind": "heading",
-      "norm_label": "private network share",
-      "source_file": "nas/README.md",
-      "source_location": "L1"
-    },
-    {
       "id": "docker_105_readme",
       "label": "105/README.md",
       "_origin": "ast",
@@ -2634,28 +2598,6 @@
       "weight": 1.0
     },
     {
-      "source": "nas_readme",
-      "target": "nas_readme_private_network_share",
-      "relation": "contains",
-      "_origin": "ast",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "nas/README.md",
-      "source_location": "L1",
-      "weight": 1.0
-    },
-    {
-      "source": "nas_readme_private_network_share",
-      "target": "nas_readme_maintenance",
-      "relation": "contains",
-      "_origin": "ast",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "nas/README.md",
-      "source_location": "L47",
-      "weight": 1.0
-    },
-    {
       "source": "scripts_backup_critical_data",
       "target": "scripts_backup_critical_data_sh__entry",
       "relation": "contains",
@@ -3093,17 +3035,6 @@
       "confidence_score": 1.0,
       "source_file": "README.md",
       "source_location": "L31",
-      "weight": 1.0
-    },
-    {
-      "source": "readme_repository_architecture",
-      "target": "nas_readme",
-      "relation": "references",
-      "_origin": "ast",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "README.md",
-      "source_location": "L34",
       "weight": 1.0
     },
     {
@@ -3702,5 +3633,5 @@
     }
   ],
   "hyperedges": [],
-  "built_at_commit": "919087ac51b8cb995b217714ae4d8e132440254d"
+  "built_at_commit": "8be787ffdf48ff3411ffb56248430ff862bd3548"
 }

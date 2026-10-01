@@ -31,6 +31,8 @@ The host is a Proxmox node named `cave`.
 Home Assistant VM 201 hosts the [Cave server control panel](HOME_ASSISTANT_PANEL.md)
 for Proxmox guest status, resource usage, storage, and backup health.
 
+LXC 108 runs a separate [private SMB file share](nas/README.md) backed by
+`/lake1t/girlfriend-nas` for Windows and macOS clients on the home LAN.
 
 Seanime is separate from the Terraform-managed LXCs and is defined in
 `media/`. It expects `/mnt/series/anime` inside its Docker environment.
